@@ -81,7 +81,7 @@
   --radius-lg: 8px;
   --radius-xl: 8px;
   --radius-btn: 8px;
-  --header-height: 92px;
+  --header-height: 160px;
   --topbar-height: 38px;
 }
 
@@ -298,7 +298,35 @@ textarea:focus-visible {
   position: sticky;
   top: 0;
   z-index: 90;
-  height: var(--header-height);
+  height: auto;
+  min-height: var(--header-height);
+  padding: 6px 0;
+}
+
+@media (max-width: 991px) {
+  .bb-header {
+    position: relative !important;
+    top: auto !important;
+    min-height: 110px;
+  }
+
+  .bb-brand-logo img {
+    width: 100px !important;
+    height: 100px !important;
+    max-width: 100px !important;
+    max-height: 100px !important;
+  }
+
+  .bb-mobile-drawer .bb-brand-logo img {
+    width: 48px !important;
+    height: 48px !important;
+    max-width: 48px !important;
+    max-height: 48px !important;
+  }
+
+  .bb-sticky-buy-bar {
+    display: none !important;
+  }
 }
 
 .bb-header-inner {
@@ -312,31 +340,20 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   gap: var(--sp-3);
+  text-decoration: none;
 }
 
 .bb-brand-logo img {
-  height: 68px;
-  width: auto;
+  width: 150px;
+  height: 150px;
+  max-width: 150px;
+  max-height: 150px;
   object-fit: contain;
+  display: block;
 }
 
 .bb-brand-title {
-  display: flex;
-  flex-direction: column;
-}
-
-.bb-brand-title .bn {
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--bb-primary);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-}
-
-.bb-brand-title .tagline {
-  font-size: 16px;
-  color: var(--bb-text-muted);
-  font-weight: 500;
+  display: none !important;
 }
 
 /* Header Nav */
@@ -2638,11 +2655,14 @@ details.faq .fa-body {
 
 @media (max-width: 768px) {
   .bb-brand-logo img {
-    height: 56px !important;
+    width: 100px !important;
+    height: 100px !important;
+    max-width: 100px !important;
+    max-height: 100px !important;
   }
 
-  .bb-brand-title .bn {
-    font-size: 22px !important;
+  .bb-brand-title {
+    display: none !important;
   }
 }
 
