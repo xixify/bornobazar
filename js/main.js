@@ -943,27 +943,14 @@
   const SVG_STAR_LG = '<svg width="22" height="22" fill="#D97706" viewBox="0 0 20 20" style="display:inline-block; vertical-align:middle;"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
   const SVG_STARS_5_LG = `<div class="stars" style="display:flex; justify-content:center; gap:4px; margin: 6px 0;">${SVG_STAR_LG}${SVG_STAR_LG}${SVG_STAR_LG}${SVG_STAR_LG}${SVG_STAR_LG}</div>`;
 
-  // Shoppable Video Reels Configuration (Instagram Reels & Products)
+  // Shoppable Video Reels Configuration (8 Authentic Reels from F:\Projects\Pias vai\Video)
   const BORNOBAZAR_REELS = [
     {
-      id: 'DcNx1IeiNzS',
-      title: '৬ প্যাক আচার কম্বো বক্স আনবক্সিং',
-      shortTitle: '৬ প্যাক কম্বো',
-      url: 'https://www.instagram.com/bornobazar/reel/DcNx1IeiNzS/',
-      poster: 'All images/724500930_995387276435925_6032589404291467890_n.jpg',
-      productId: 'BB-COM-001',
-      productName: '৬ প্যাক আচার কম্বো',
-      productThumb: 'All images/724500930_995387276435925_6032589404291467890_n.jpg',
-      price: 1190,
-      regularPrice: 1260,
-      weight: '1.2 kg'
-    },
-    {
-      id: 'DcLiLYpkaYx',
-      title: 'ঐতিহ্যবাহী খাঁটি রসুন আচার',
-      shortTitle: 'রসুন আচার',
-      url: 'https://www.instagram.com/bornobazar/reel/DcLiLYpkaYx/',
-      poster: 'All images/761355190_1034052569236062_78667506752820005_n.jpg',
+      id: 'reel_1',
+      title: 'আচার কিনতে কোনটা দেখেন? খাঁটি রসুনের আচার',
+      shortTitle: 'রসুন আচার স্পেশাল',
+      videoSrc: 'videos/reel_1.mp4',
+      poster: 'videos/poster_1.jpg',
       productId: 'BB-ACH-012',
       productName: 'রসুন আচার (স্পেশাল)',
       productThumb: 'All images/761355190_1034052569236062_78667506752820005_n.jpg',
@@ -972,11 +959,11 @@
       weight: '200 gm'
     },
     {
-      id: 'DcyYuy4Coi7',
-      title: 'খাঁটি সরিষার তেলে রোদে তৈরি আলুবোখারা আচার',
+      id: 'reel_2',
+      title: 'খাঁটি আচারের সুবাস ও স্বাদ — আলুবোখারা আচার',
       shortTitle: 'আলুবোখারা আচার',
-      url: 'https://www.instagram.com/bornobazar/reel/DcyYuy4Coi7/',
-      poster: 'All images/779787836_1049495257691793_4108399455579486072_n.jpg',
+      videoSrc: 'videos/reel_2.mp4',
+      poster: 'videos/poster_2.jpg',
       productId: 'BB-ACH-002',
       productName: 'আলুবোখারা আচার',
       productThumb: 'All images/779787836_1049495257691793_4108399455579486072_n.jpg',
@@ -985,24 +972,11 @@
       weight: '200 gm'
     },
     {
-      id: 'Dc8fMd4jSwf',
-      title: 'টক-ঝাল-মিষ্টি সেরা স্বাদের তেঁতুল আচার',
-      shortTitle: 'তেঁতুল আচার',
-      url: 'https://www.instagram.com/bornobazar/reel/Dc8fMd4jSwf/',
-      poster: 'All images/813976083_1073010388673613_8899924605867364727_n.jpg',
-      productId: 'BB-ACH-016',
-      productName: 'তেঁতুল আচার',
-      productThumb: 'All images/813976083_1073010388673613_8899924605867364727_n.jpg',
-      price: 380,
-      regularPrice: 420,
-      weight: '400 gm'
-    },
-    {
-      id: 'Dc73IHzAdLp',
-      title: 'নিউট্রি আচার কম্বো — ৩টি সেরা ফ্লেভার',
-      shortTitle: 'নিউট্রি কম্বো',
-      url: 'https://www.instagram.com/bornobazar/reel/Dc73IHzAdLp/',
-      poster: 'All images/788601539_1056888763619109_5968941487902862885_n.jpg',
+      id: 'reel_3',
+      title: 'খাবারের টেবিলে ৩টি আচারের স্বাদ — নিউট্রি আচার কম্বো',
+      shortTitle: 'নিউট্রি আচার কম্বো',
+      videoSrc: 'videos/reel_3.mp4',
+      poster: 'videos/poster_3.jpg',
       productId: 'BB-COM-006',
       productName: 'নিউট্রি আচার কম্বো',
       productThumb: 'All images/788601539_1056888763619109_5968941487902862885_n.jpg',
@@ -1011,30 +985,69 @@
       weight: '800 gm'
     },
     {
-      id: 'DbdHGupjlQu',
-      title: 'গ্রামের বাড়ির রোদে শুকানো বরই আচার',
-      shortTitle: 'বরই আচার',
-      url: 'https://www.instagram.com/bornobazar/reel/DbdHGupjlQu/',
-      poster: 'All images/807386813_1076326418342010_1423256031986250910_n.jpg',
+      id: 'reel_4',
+      title: 'আচারের আসল মশলা ও ঝাঁজ — খাঁটি তেঁতুল আচার',
+      shortTitle: 'তেঁতুল আচার প্রিমিয়াম',
+      videoSrc: 'videos/reel_4.mp4',
+      poster: 'videos/poster_4.jpg',
+      productId: 'BB-ACH-016',
+      productName: 'তেঁতুল আচার (প্রিমিয়াম জার)',
+      productThumb: 'All images/813976083_1073010388673613_8899924605867364727_n.jpg',
+      price: 380,
+      regularPrice: 420,
+      weight: '400 gm'
+    },
+    {
+      id: 'reel_5',
+      title: 'প্রতিদিন খাবারে আচারের তৃপ্তি — বরই আচার টক-মিষ্টি ক্রাশ',
+      shortTitle: 'বরই আচার ক্রাশ',
+      videoSrc: 'videos/reel_5.mp4',
+      poster: 'videos/poster_5.jpg',
       productId: 'BB-ACH-018',
-      productName: 'বরই আচার',
+      productName: 'বরই আচার (টক-মিষ্টি ক্রাশ)',
       productThumb: 'All images/807386813_1076326418342010_1423256031986250910_n.jpg',
       price: 380,
       regularPrice: 420,
       weight: '400 gm'
     },
     {
-      id: 'DbYAkAfCQNm',
-      title: 'রসুন ও কালোজিরা বিশেষ স্বাস্থ্যকর আচার',
-      shortTitle: 'রসুন-কালোজিরা',
-      url: 'https://www.instagram.com/bornobazar/reel/DbYAkAfCQNm/',
-      poster: 'All images/778279709_1047741551200497_8987538511452370084_n.jpg',
+      id: 'reel_6',
+      title: 'খাবারে যদি আচার না থাকে... রসুন কালোজিরা আচার',
+      shortTitle: 'রসুন কালোজিরা আচার',
+      videoSrc: 'videos/reel_6.mp4',
+      poster: 'videos/poster_6.jpg',
       productId: 'BB-ACH-025',
-      productName: 'রসুন কালোজিরা আচার',
+      productName: 'রসুন কালোজিরা প্রিমিয়াম জার',
       productThumb: 'All images/778279709_1047741551200497_8987538511452370084_n.jpg',
       price: 380,
       regularPrice: 450,
       weight: '400 gm'
+    },
+    {
+      id: 'reel_7',
+      title: 'ঘরোয়া আচারের আসল টেস্ট — তেঁতুল বরই মিক্স আচার',
+      shortTitle: 'তেঁতুল বরই মিক্স',
+      videoSrc: 'videos/reel_7.mp4',
+      poster: 'videos/poster_7.jpg',
+      productId: 'BB-ACH-008',
+      productName: 'তেঁতুল বরই মিক্স আচার',
+      productThumb: 'All images/810793616_1071418578832794_8576133246231267575_n.jpg',
+      price: 190,
+      regularPrice: 220,
+      weight: '200 gm'
+    },
+    {
+      id: 'reel_8',
+      title: 'বাজারের আচার বনাম খাঁটি বর্ণবাজার — ৬ প্যাক কম্বো গিফট বক্স',
+      shortTitle: '৬ প্যাক গিফট বক্স',
+      videoSrc: 'videos/reel_8.mp4',
+      poster: 'videos/poster_8.jpg',
+      productId: 'BB-COM-001',
+      productName: '৬ প্যাক আচার কম্বো গিফট বক্স',
+      productThumb: 'All images/724500930_995387276435925_6032589404291467890_n.jpg',
+      price: 1190,
+      regularPrice: 1260,
+      weight: '1.2 kg'
     }
   ];
 
@@ -1067,6 +1080,9 @@
       }
       if (document.getElementById('home-reels-section')) {
         this.renderReelsSection('home-reels-section');
+      }
+      if (document.getElementById('shop-reels-section')) {
+        this.renderReelsSection('shop-reels-section');
       }
       if (document.getElementById('pd-info') || document.getElementById('single-product-app')) {
         this.initProductPage();
@@ -1657,8 +1673,14 @@
             <h3 class="bb-card-title">
               <a href="product.html?id=${p.id}">${escHtml(p.name_bn)}</a>
             </h3>
+            <div class="bb-card-rating" style="display: flex; align-items: center; gap: 4px; margin-bottom: 6px;">
+              <span class="bb-card-stars" style="color: #D97706; display: inline-flex; gap: 2px;">
+                ${SVG_STAR_SM}${SVG_STAR_SM}${SVG_STAR_SM}${SVG_STAR_SM}${SVG_STAR_SM}
+              </span>
+              <span class="bb-card-score" style="font-size: 16px; color: var(--bb-text-muted); font-weight: 600; margin-left: 4px;">৪.৯ (৩৬)</span>
+            </div>
             <div class="bb-card-weights">
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
+              <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 6a2 2 0 012-2h8a2 2 0 012 2v2H4V6zm-2 4a2 2 0 012-2h12a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2v-6z" clip-rule="evenodd"/>
               </svg>
               <span>${weightText}</span>
@@ -1669,10 +1691,10 @@
             </div>
             <div class="bb-card-actions">
               <button class="bb-btn bb-btn-primary bb-btn-sm bb-btn-full" onclick="Bornobazar.addToCart('${p.id}', '${firstWeight}')">
-                <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
                 </svg>
-                অর্ডার করুন
+                <span>কার্টে যোগ করুন</span>
               </button>
             </div>
           </div>
@@ -2090,7 +2112,7 @@
     },
 
     /* ==========================================================================
-       SHOPPABLE VIDEO REELS & ALPINO COMPONENTS
+       SHOPPABLE VIDEO REELS & ALPINO / GOOSEBUMPS COMPONENTS
        ========================================================================== */
     renderReelsSection: function (containerId) {
       const container = document.getElementById(containerId);
@@ -2100,13 +2122,17 @@
 
       BORNOBAZAR_REELS.forEach((r, idx) => {
         const regPriceHtml = (r.regularPrice && r.regularPrice > r.price)
-          ? ` <s style="font-size: 13px; color: var(--bb-text-subtle); margin-left: 4px;">${fmtPrice(r.regularPrice)}</s>`
+          ? ` <s style="font-size: 16px; color: var(--bb-text-subtle); margin-left: 4px;">${fmtPrice(r.regularPrice)}</s>`
           : '';
 
         cardsHtml += `
           <div class="bb-reel-card" data-reel-idx="${idx}" onclick="if(!event.target.closest('.bb-reel-product-card')) Bornobazar.openReelModal(${idx})">
             <img class="bb-reel-poster" src="${r.poster}" alt="${escHtml(r.title)}" loading="lazy">
             <div class="bb-reel-overlay"></div>
+            <div class="bb-reel-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/></svg>
+              <span>ভিডিও রিভিউ</span>
+            </div>
             <button type="button" class="bb-reel-play-btn" aria-label="ভিডিও চালান" onclick="Bornobazar.openReelModal(${idx}); event.stopPropagation();">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                 <polygon points="8 5 19 12 8 19 8 5"/>
@@ -2120,14 +2146,17 @@
                   <div class="bb-reel-product-price">${fmtPrice(r.price)}${regPriceHtml}</div>
                 </div>
                 <a href="product.html?id=${r.productId}" class="bb-reel-ext-btn" title="বিস্তারিত দেখুন" aria-label="বিস্তারিত দেখুন">
-                  <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                   </svg>
                 </a>
               </div>
               <div class="bb-reel-btn-row">
                 <button type="button" class="bb-reel-add-cart-btn" onclick="Bornobazar.addToCart('${r.productId}', '${r.weight}')">
-                  ADD TO CART
+                  <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                  </svg>
+                  <span>কার্টে যোগ করুন</span>
                 </button>
                 <button type="button" class="bb-reel-cart-icon-btn" onclick="Bornobazar.addToCart('${r.productId}', '${r.weight}')" aria-label="কার্টে যোগ করুন">
                   <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -2145,13 +2174,13 @@
           <div class="bb-reels-header">
             <div class="bb-reels-header-left">
               <span class="bb-reels-badge">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
-                ভিডিও গ্যালারি ও রিভিউ
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
+                ভিডিও গ্যালারি ও কাস্টমার রিভিউ
               </span>
               <h2 class="bb-reels-title">আমাদের তৈরি আচার ও কাস্টমারদের গল্প</h2>
-              <p class="bb-reels-subtitle">সরাসরি দেখে অর্ডার করুন মেহেরপুরের খাঁটি স্বাদের ঘরোয়া আচার</p>
+              <p class="bb-reels-subtitle" style="font-size: 16px; color: var(--bb-text-muted); margin-top: 4px;">সরাসরি ভিডিও দেখে যাচাই করে অর্ডার করুন মেহেরপুরের খাঁটি স্বাদের ঘরোয়া আচার</p>
             </div>
-            <div class="bb-reels-nav-btns">
+            <div class="bb-reels-nav-btns" style="display: flex; gap: 8px;">
               <button type="button" class="bb-reels-nav-btn bb-reels-prev" data-carousel="${carouselId}" aria-label="পূর্ববর্তী ভিডিও">
                 <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
               </button>
@@ -2199,31 +2228,45 @@
       const drawer = document.getElementById('reel-modal-drawer');
       if (!modal || !iframeWrap) return;
 
+      // Native HTML5 Video playback (High-Performance 720x1280 Video)
       iframeWrap.innerHTML = `
-        <iframe src="https://www.instagram.com/reel/${r.id}/embed/" frameborder="0" scrolling="no" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="${escHtml(r.title)}"></iframe>
+        <video id="reel-native-video" src="${r.videoSrc}" poster="${r.poster}" controls autoplay loop playsinline preload="auto" style="width:100%; height:100%; object-fit:cover; display:block; background:#000;">
+          <source src="${r.videoSrc}" type="video/mp4">
+          আপনার ব্রাউজার ভিডিও প্লে করতে পারছে না।
+        </video>
       `;
+
+      const videoEl = document.getElementById('reel-native-video');
+      if (videoEl) {
+        const playPromise = videoEl.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            videoEl.muted = true;
+            videoEl.play();
+          });
+        }
+      }
 
       if (drawer) {
         drawer.innerHTML = `
           <div class="bb-reel-modal-p-info">
             <img src="${r.productThumb}" alt="${escHtml(r.productName)}" class="bb-reel-modal-p-img">
             <div>
-              <div style="font-size: 15px; font-weight: 700; color: var(--bb-text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 170px;">
+              <div style="font-size: 16px; font-weight: 700; color: var(--bb-text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 170px;">
                 ${escHtml(r.productName)}
               </div>
-              <div style="font-size: 14px; font-weight: 700; color: var(--bb-primary);">
+              <div style="font-size: 16px; font-weight: 700; color: var(--bb-primary); font-family: var(--font-english);">
                 ${fmtPrice(r.price)}
-                ${r.regularPrice > r.price ? `<s style="font-size: 12px; color: var(--bb-text-subtle); margin-left: 4px;">${fmtPrice(r.regularPrice)}</s>` : ''}
+                ${r.regularPrice > r.price ? `<s style="font-size: 16px; color: var(--bb-text-subtle); margin-left: 4px;">${fmtPrice(r.regularPrice)}</s>` : ''}
               </div>
             </div>
           </div>
           <div class="bb-reel-modal-actions">
-            <button type="button" class="bb-btn bb-btn-primary bb-btn-sm" style="font-size: 14px; padding: 6px 12px;" onclick="Bornobazar.addToCart('${r.productId}', '${r.weight}')">
+            <button type="button" class="bb-btn bb-btn-primary bb-btn-sm" style="font-size: 16px; padding: 8px 14px; border-radius: 8px;" onclick="Bornobazar.addToCart('${r.productId}', '${r.weight}')">
               কার্টে যোগ করুন
             </button>
-            <a href="${r.url}" target="_blank" rel="noopener" class="bb-btn bb-btn-secondary bb-btn-sm" style="font-size: 14px; padding: 6px 10px; display: inline-flex; align-items: center; gap: 4px;" title="ইনস্টাগ্রামে দেখুন">
-              <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-              <span>রিল</span>
+            <a href="product.html?id=${r.productId}" class="bb-btn bb-btn-secondary bb-btn-sm" style="font-size: 16px; padding: 8px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 4px;" title="বিস্তারিত দেখুন">
+              বিস্তারিত
             </a>
           </div>
         `;
@@ -2237,6 +2280,14 @@
     closeReelModal: function () {
       const modal = document.getElementById('reel-modal');
       const iframeWrap = document.getElementById('reel-iframe-container');
+      const videoEl = document.getElementById('reel-native-video');
+      if (videoEl) {
+        try {
+          videoEl.pause();
+          videoEl.removeAttribute('src');
+          videoEl.load();
+        } catch (e) {}
+      }
       if (modal) {
         modal.classList.remove('open');
         modal.classList.remove('active');

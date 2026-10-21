@@ -179,6 +179,54 @@ textarea:focus-visible {
 }
 
 /* ==========================================================================
+   GOOSEBUMPS-INSPIRED CONTINUOUS MARQUEE BAR
+   ========================================================================== */
+.bb-marquee-bar {
+  background-color: var(--bb-primary-deep);
+  color: #FFFFFF;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  user-select: none;
+  display: flex;
+  position: relative;
+  z-index: 95;
+}
+
+.bb-marquee-track {
+  display: inline-flex;
+  gap: 36px;
+  flex-shrink: 0;
+  animation: bbMarqueeScroll 32s linear infinite;
+}
+
+.bb-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bb-marquee-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--bb-gold);
+}
+
+@keyframes bbMarqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.bb-marquee-bar:hover .bb-marquee-track {
+  animation-play-state: paused;
+}
+
+/* ==========================================================================
    TOP ANNOUNCEMENT BAR (SOLID DEEP MAROON)
    ========================================================================== */
 .bb-topbar {
@@ -212,7 +260,7 @@ textarea:focus-visible {
   color: var(--bb-text-inverse);
   font-size: 16px;
   font-weight: 700;
-  padding: 2px 6px;
+  padding: 2px 8px;
   border-radius: var(--radius-sm);
   text-transform: uppercase;
 }
@@ -595,7 +643,7 @@ textarea:focus-visible {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: 20px;
+    border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     position: relative;
     z-index: 4;
@@ -604,7 +652,7 @@ textarea:focus-visible {
   .bb-hero-dot {
     width: 12px;
     height: 12px;
-    border-radius: 6px;
+    border-radius: 50%;
     background-color: rgba(30, 27, 24, 0.3);
     border: none;
     cursor: pointer;
@@ -788,6 +836,107 @@ textarea:focus-visible {
   .bb-section-title {
     font-size: 32px;
   }
+}
+
+/* ==========================================================================
+   GOOSEBUMPS-INSPIRED CIRCULAR COLLECTION STRIP
+   ========================================================================== */
+.bb-collections-strip {
+  padding: 24px 0 20px;
+  background-color: var(--bb-bg-surface);
+  border-bottom: 1px solid var(--bb-border-hairline);
+}
+
+.bb-collection-circles {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 28px;
+  overflow-x: auto;
+  padding: 4px 6px 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.bb-collection-circles::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 820px) {
+  .bb-collection-circles {
+    justify-content: flex-start;
+    gap: 18px;
+  }
+}
+
+.bb-circle-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 0 0 auto;
+  width: 92px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.bb-circle-img-wrap {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  padding: 3px;
+  border: 2px solid var(--bb-border-medium);
+  background: #FAF7F2;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.bb-circle-item:hover .bb-circle-img-wrap {
+  border-color: var(--bb-primary);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(197, 30, 37, 0.18);
+}
+
+.bb-circle-img-wrap img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.bb-circle-item:hover .bb-circle-img-wrap img {
+  transform: scale(1.08);
+}
+
+.bb-circle-label {
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--bb-text-main);
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.bb-circle-item:hover .bb-circle-label {
+  color: var(--bb-primary);
+}
+
+.bb-circle-play-badge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bb-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
 .bb-cat-grid {
@@ -2499,7 +2648,7 @@ details.faq .fa-body {
 }
 
 .bb-mobile-nav-badge {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   padding: 2px 8px;
   border-radius: var(--radius-sm);
@@ -2676,17 +2825,17 @@ details.faq .fa-body {
   position: absolute;
   top: 10px;
   left: 10px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   color: #fff;
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 14px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 16px;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   z-index: 2;
 }
 
@@ -2695,8 +2844,8 @@ details.faq .fa-body {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 54px;
-  height: 54px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.28);
   backdrop-filter: blur(8px);
@@ -2726,8 +2875,8 @@ details.faq .fa-body {
   background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-radius: var(--radius-sm);
-  padding: 8px 10px;
+  border-radius: 8px;
+  padding: 10px 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
   z-index: 3;
 }
@@ -2735,14 +2884,14 @@ details.faq .fa-body {
 .bb-reel-product-top {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
+  gap: 10px;
+  margin-bottom: 8px;
 }
 
 .bb-reel-product-thumb {
-  width: 44px;
-  height: 44px;
-  border-radius: 6px;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
   object-fit: cover;
   flex-shrink: 0;
   border: 1px solid var(--bb-border-hairline);
@@ -2755,54 +2904,58 @@ details.faq .fa-body {
 }
 
 .bb-reel-product-title {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--bb-text-main);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 .bb-reel-product-price {
   font-family: var(--font-english);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--bb-primary);
+  margin-top: 2px;
 }
 
 .bb-reel-ext-btn {
   color: var(--bb-text-muted);
-  padding: 4px;
+  padding: 6px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s;
+  transition: all 0.2s;
+  background: var(--bb-bg-warm);
 }
 
 .bb-reel-ext-btn:hover {
   color: var(--bb-primary);
+  background: var(--bb-primary-subtle);
 }
 
 .bb-reel-btn-row {
   display: flex;
-  gap: 6px;
+  gap: 8px;
 }
 
 .bb-reel-add-cart-btn {
   flex: 1;
-  background-color: #1E6B38; /* Green button matching screenshot */
+  background-color: var(--bb-green);
   color: #fff;
   border: none;
-  border-radius: 6px;
-  padding: 6px 10px;
-  font-size: 14px;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 6px;
   transition: background-color 0.2s;
 }
 
@@ -2811,12 +2964,12 @@ details.faq .fa-body {
 }
 
 .bb-reel-cart-icon-btn {
-  background-color: #1E6B38;
+  background-color: var(--bb-green);
   color: #fff;
   border: none;
-  border-radius: 6px;
-  width: 32px;
-  height: 32px;
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2858,7 +3011,7 @@ details.faq .fa-body {
   height: 85vh;
   max-height: 750px;
   background-color: #000;
-  border-radius: var(--radius-md);
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
   display: flex;
@@ -2869,12 +3022,12 @@ details.faq .fa-body {
   position: absolute;
   top: 12px;
   right: 12px;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.7);
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2930,15 +3083,19 @@ details.faq .fa-body {
   overflow: hidden;
 }
 
+.bb-reel-modal-iframe-wrap video,
 .bb-reel-modal-iframe-wrap iframe {
   width: 100%;
   height: 100%;
   border: none;
+  object-fit: cover;
+  display: block;
+  background: #000;
 }
 
 .bb-reel-modal-drawer {
   background: #fff;
-  padding: 12px 14px;
+  padding: 14px 16px;
   border-top: 1px solid var(--bb-border-hairline);
   display: flex;
   align-items: center;
@@ -2950,14 +3107,14 @@ details.faq .fa-body {
 .bb-reel-modal-p-info {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   min-width: 0;
 }
 
 .bb-reel-modal-p-img {
-  width: 44px;
-  height: 44px;
-  border-radius: 6px;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
   object-fit: cover;
   flex-shrink: 0;
   border: 1px solid var(--bb-border-hairline);
@@ -3093,7 +3250,7 @@ details.faq .fa-body {
 }
 
 .bb-artisan-card-desc {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--bb-text-muted);
   line-height: 1.5;
 }
@@ -3155,7 +3312,7 @@ details.faq .fa-body {
 }
 
 .bb-sticky-weight {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--bb-text-muted);
 }
 
