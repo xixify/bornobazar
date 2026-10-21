@@ -1078,6 +1078,9 @@
       if (document.getElementById('home-featured-grid')) {
         this.initHomePage();
       }
+      if (document.getElementById('home-combo-spotlight')) {
+        this.renderComboSpotlight('home-combo-spotlight');
+      }
       if (document.getElementById('home-reels-section')) {
         this.renderReelsSection('home-reels-section');
       }
@@ -1655,10 +1658,24 @@
         const comboBadge = p.category === 'স্পেশাল কম্বো' ? '<span class="bb-card-badge bb-badge-combo">কম্বো প্যাক</span>' : '';
         const regPrice = (p.on_sale && p.regular_price > p.sale_price) ? '<span class="bb-price-regular">' + fmtPrice(p.regular_price) + '</span>' : '';
         const firstWeight = (p.weights && p.weights.length > 0) ? p.weights[0] : '';
-        const weightText = (p.weights && p.weights.length > 0) ? p.weights.join(', ') : 'স্ট্যান্ডার্ড জার';
+        const initialPrice = (p.weight_pricing && p.weight_pricing[firstWeight]) || p.sale_price;
+
+        const variantPillsHtml = (p.weights && p.weights.length > 1)
+          ? `<div class="bb-card-variant-pills">
+              ${p.weights.map((w, wIdx) => {
+                const wPrice = (p.weight_pricing && p.weight_pricing[w]) || p.sale_price;
+                return `<button type="button" class="bb-card-pill ${wIdx === 0 ? 'active' : ''}" data-weight="${escHtml(w)}" data-price="${wPrice}" onclick="Bornobazar.selectCardVariant(this, '${p.id}', '${escHtml(w)}', ${wPrice})">${escHtml(w)}</button>`;
+              }).join('')}
+            </div>`
+          : `<div class="bb-card-weights">
+              <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 6a2 2 0 012-2h8a2 2 0 012 2v2H4V6zm-2 4a2 2 0 012-2h12a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2v-6z" clip-rule="evenodd"/>
+              </svg>
+              <span>${firstWeight || 'স্ট্যান্ডার্ড জার'}</span>
+            </div>`;
 
         html += `
-          <div class="bb-product-card" data-id="${p.id}">
+          <div class="bb-product-card" data-id="${p.id}" data-selected-weight="${escHtml(firstWeight)}" data-selected-price="${initialPrice}">
             <div class="bb-card-image-wrap">
               <div class="bb-badge-stack">
                 ${saleBadge}
@@ -1679,28 +1696,512 @@
               </span>
               <span class="bb-card-score" style="font-size: 16px; color: var(--bb-text-muted); font-weight: 600; margin-left: 4px;">৪.৯ (৩৬)</span>
             </div>
-            <div class="bb-card-weights">
-              <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 6a2 2 0 012-2h8a2 2 0 012 2v2H4V6zm-2 4a2 2 0 012-2h12a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2v-6z" clip-rule="evenodd"/>
-              </svg>
-              <span>${weightText}</span>
-            </div>
+            ${variantPillsHtml}
             <div class="bb-card-price-row">
-              <span class="bb-price-current">${fmtPrice(p.sale_price)}</span>
+              <span class="bb-price-current">${fmtPrice(initialPrice)}</span>
               ${regPrice}
             </div>
-            <div class="bb-card-actions">
-              <button class="bb-btn bb-btn-primary bb-btn-sm bb-btn-full" onclick="Bornobazar.addToCart('${p.id}', '${firstWeight}')">
-                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+            <div class="bb-card-actions-dual">
+              <button type="button" class="bb-btn-cart-outline" onclick="Bornobazar.addCardSelectedToCart('${p.id}', this)" title="কার্টে যোগ করুন">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
                 </svg>
-                <span>কার্টে যোগ করুন</span>
+                <span>কার্ট</span>
+              </button>
+              <button type="button" class="bb-btn-quick-buy" onclick="Bornobazar.openCardQuickOrder('${p.id}', this)" title="১ ক্লিকে সরাসরি ক্যাশ অন ডেলিভারি অর্ডার">
+                <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                <span>১-ক্লিকে অর্ডার</span>
               </button>
             </div>
           </div>
         `;
       });
       container.innerHTML = html;
+    },
+
+    selectCardVariant: function (btnEl, productId, weight, price) {
+      const card = btnEl.closest('.bb-product-card');
+      if (!card) return;
+      card.querySelectorAll('.bb-card-pill').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+      card.setAttribute('data-selected-weight', weight);
+      card.setAttribute('data-selected-price', price);
+      const priceEl = card.querySelector('.bb-price-current');
+      if (priceEl) priceEl.textContent = fmtPrice(price);
+    },
+
+    addCardSelectedToCart: function (productId, btnEl) {
+      const card = btnEl.closest('.bb-product-card');
+      const prod = this.findProduct(productId);
+      if (!prod) return;
+      const weight = card ? (card.getAttribute('data-selected-weight') || (prod.weights && prod.weights[0]) || 'স্ট্যান্ডার্ড') : ((prod.weights && prod.weights[0]) || 'স্ট্যান্ডার্ড');
+      this.addToCart(productId, weight, 1);
+    },
+
+    openCardQuickOrder: function (productId, btnEl) {
+      const card = btnEl.closest('.bb-product-card');
+      const prod = this.findProduct(productId);
+      if (!prod) return;
+      const weight = card ? (card.getAttribute('data-selected-weight') || (prod.weights && prod.weights[0]) || 'স্ট্যান্ডার্ড') : ((prod.weights && prod.weights[0]) || 'স্ট্যান্ডার্ড');
+      this.openQuickOrderModal(productId, weight, 1);
+    },
+
+    /* ==========================================================================
+       1-CLICK EXPRESS CHECKOUT MODAL (HIGH CONVERSION LOCAL COD)
+       ========================================================================== */
+    openQuickOrderModal: function (productId, initialWeight, initialQty) {
+      const prod = this.findProduct(productId);
+      if (!prod) return;
+      let modalBackdrop = document.getElementById('bb-quick-order-modal');
+      if (!modalBackdrop) {
+        modalBackdrop = document.createElement('div');
+        modalBackdrop.id = 'bb-quick-order-modal';
+        modalBackdrop.className = 'bb-quick-modal-backdrop';
+        document.body.appendChild(modalBackdrop);
+      }
+
+      let selectedWeight = initialWeight || (prod.weights && prod.weights[0]) || 'স্ট্যান্ডার্ড';
+      let qty = Math.max(1, parseInt(initialQty, 10) || 1);
+      let deliveryArea = 'inside_dhaka';
+
+      const getUnitPrice = (w) => {
+        if (prod.weight_pricing && prod.weight_pricing[w]) return prod.weight_pricing[w];
+        return prod.sale_price;
+      };
+
+      const renderModal = () => {
+        const unitPrice = getUnitPrice(selectedWeight);
+        const subtotal = unitPrice * qty;
+        const shipping = deliveryArea === 'inside_dhaka' ? 70 : 130;
+        const total = subtotal + shipping;
+        const regPrice = prod.regular_price > unitPrice ? prod.regular_price * qty : 0;
+
+        const weightPillsHtml = (prod.weights && prod.weights.length > 1) ? `
+          <div style="margin-top: 8px;">
+            <div style="font-size: 16px; font-weight: 600; color: var(--bb-text-muted); margin-bottom: 6px;">ওজন / সাইজ নির্বাচন করুন:</div>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              ${prod.weights.map(w => `
+                <button type="button" class="bb-card-pill ${w === selectedWeight ? 'active' : ''}" onclick="Bornobazar._updateQuickModalWeight('${w}')">
+                  ${w}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        ` : '';
+
+        modalBackdrop.innerHTML = `
+          <div class="bb-quick-modal-dialog" onclick="event.stopPropagation()">
+            <div class="bb-quick-modal-header">
+              <div class="bb-quick-modal-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--bb-primary);">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                <span>১-ক্লিকে সরাসরি অর্ডার (ক্যাশ অন ডেলিভারি)</span>
+              </div>
+              <button type="button" class="bb-quick-modal-close" onclick="Bornobazar.closeQuickOrderModal()" aria-label="বন্ধ করুন">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Product preview -->
+            <div class="bb-quick-product-strip">
+              <img src="${prod.primary_image || 'Logo/bornobazar-logo.png'}" alt="${escHtml(prod.name_bn)}" class="bb-quick-product-img">
+              <div class="bb-quick-product-info">
+                <div class="bb-quick-product-name">${escHtml(prod.name_bn)}</div>
+                <div class="bb-quick-product-variant">${selectedWeight}</div>
+                <div class="bb-quick-product-price">
+                  ${fmtPrice(unitPrice)}
+                  ${regPrice > subtotal ? `<s style="font-size: 16px; color: var(--bb-text-subtle); margin-left: 6px;">${fmtPrice(regPrice / qty)}</s>` : ''}
+                </div>
+              </div>
+              <!-- Quantity stepper -->
+              <div style="display: flex; align-items: center; border: 1.5px solid var(--bb-border-medium); border-radius: 8px; overflow: hidden; background: #fff;">
+                <button type="button" onclick="Bornobazar._updateQuickModalQty(-1)" style="width: 32px; height: 32px; font-weight: 700; font-size: 16px; background: none; border: none; cursor: pointer;">&minus;</button>
+                <span style="width: 32px; text-align: center; font-weight: 700; font-size: 16px;">${qty}</span>
+                <button type="button" onclick="Bornobazar._updateQuickModalQty(1)" style="width: 32px; height: 32px; font-weight: 700; font-size: 16px; background: none; border: none; cursor: pointer;">&plus;</button>
+              </div>
+            </div>
+
+            ${weightPillsHtml}
+
+            <!-- Fast Form -->
+            <form id="bb-quick-order-form" onsubmit="Bornobazar._submitQuickOrder(event, '${prod.id}')" style="margin-top: 16px;">
+              <div class="bb-quick-form-group">
+                <label class="bb-quick-label" for="qo_name">আপনার নাম *</label>
+                <input type="text" id="qo_name" class="bb-quick-input" placeholder="যেমন: মোহাম্মদ রফিকুল ইসলাম" required>
+              </div>
+
+              <div class="bb-quick-form-group">
+                <label class="bb-quick-label" for="qo_phone">মোবাইল নম্বর (১১ ডিজিট) *</label>
+                <input type="tel" id="qo_phone" class="bb-quick-input" placeholder="01XXXXXXXXX" pattern="01[3-9][0-9]{8}" required>
+              </div>
+
+              <div class="bb-quick-form-group">
+                <label class="bb-quick-label" for="qo_address">সম্পূর্ণ ডেলিভারি ঠিকানা *</label>
+                <input type="text" id="qo_address" class="bb-quick-input" placeholder="বাড়ি/রোড নং, থানা/উপজেলা, জেলা" required>
+              </div>
+
+              <div class="bb-quick-form-group">
+                <label class="bb-quick-label">ডেলিভারি এলাকা বাছাই করুন:</label>
+                <div class="bb-quick-delivery-options">
+                  <div class="bb-quick-delivery-card ${deliveryArea === 'inside_dhaka' ? 'active' : ''}" onclick="Bornobazar._updateQuickModalArea('inside_dhaka')">
+                    <input type="radio" name="qo_area" value="inside_dhaka" ${deliveryArea === 'inside_dhaka' ? 'checked' : ''} style="accent-color: var(--bb-primary);">
+                    <span>ঢাকার ভিতরে (৳৭০)</span>
+                  </div>
+                  <div class="bb-quick-delivery-card ${deliveryArea === 'outside_dhaka' ? 'active' : ''}" onclick="Bornobazar._updateQuickModalArea('outside_dhaka')">
+                    <input type="radio" name="qo_area" value="outside_dhaka" ${deliveryArea === 'outside_dhaka' ? 'checked' : ''} style="accent-color: var(--bb-primary);">
+                    <span>ঢাকার বাইরে (৳১৩০)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Live order summary -->
+              <div class="bb-quick-order-summary">
+                <div class="bb-quick-summary-row">
+                  <span>পণ্যের মূল্য (${qty}টি)</span>
+                  <span>${fmtPrice(subtotal)}</span>
+                </div>
+                <div class="bb-quick-summary-row">
+                  <span>ডেলিভারি চার্জ</span>
+                  <span>${fmtPrice(shipping)}</span>
+                </div>
+                <div class="bb-quick-summary-row total">
+                  <span>সর্বমোট প্রদেয়</span>
+                  <span>${fmtPrice(total)}</span>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="bb-btn bb-btn-primary bb-btn-lg bb-btn-full" style="justify-content: center; gap: 8px;">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>অর্ডার নিশ্চিত করুন — ক্যাশ অন ডেলিভারি</span>
+              </button>
+
+              <div class="bb-quick-trust-notice">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>কোনো অগ্রিম পেমেন্ট নেই &bull; পণ্য দেখে টাকা দিন</span>
+              </div>
+
+              <!-- Direct WhatsApp button -->
+              <button type="button" class="bb-btn bb-btn-secondary bb-btn-sm bb-btn-full" style="margin-top: 10px; justify-content: center; gap: 8px; color: #128C7E;" onclick="Bornobazar._orderViaWhatsApp('${prod.name_bn}', '${selectedWeight}', ${qty}, ${total})">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                </svg>
+                <span>WhatsApp-এ সরাসরি অর্ডার করুন</span>
+              </button>
+            </form>
+          </div>
+        `;
+      };
+
+      this._updateQuickModalWeight = (w) => {
+        selectedWeight = w;
+        renderModal();
+      };
+      this._updateQuickModalQty = (delta) => {
+        qty = Math.max(1, qty + delta);
+        renderModal();
+      };
+      this._updateQuickModalArea = (area) => {
+        deliveryArea = area;
+        renderModal();
+      };
+      this._submitQuickOrder = (e, pId) => {
+        e.preventDefault();
+        const name = document.getElementById('qo_name').value.trim();
+        const phone = document.getElementById('qo_phone').value.trim();
+        const address = document.getElementById('qo_address').value.trim();
+        if (!name || !phone || !address) return;
+
+        const unitPrice = getUnitPrice(selectedWeight);
+        const shipping = deliveryArea === 'inside_dhaka' ? 70 : 130;
+        const subtotal = unitPrice * qty;
+        const total = subtotal + shipping;
+        const orderId = 'BB-' + Math.floor(100000 + Math.random() * 900000);
+
+        const orderData = {
+          orderId: orderId,
+          customer: { name, phone, address, area: deliveryArea },
+          items: [{
+            id: prod.id,
+            name_bn: prod.name_bn,
+            weight: selectedWeight,
+            price: unitPrice,
+            qty: qty,
+            image: prod.primary_image
+          }],
+          subtotal: subtotal,
+          shipping: shipping,
+          total: total,
+          date: new Date().toLocaleDateString('bn-BD')
+        };
+
+        localStorage.setItem('bb_last_order', JSON.stringify(orderData));
+        this.closeQuickOrderModal();
+        window.location.href = 'order-success.html?order=' + orderId;
+      };
+
+      this._orderViaWhatsApp = (name, weight, q, tot) => {
+        const text = `আসসালামু আলাইকুম! বর্ণবাজার-এ সরাসরি অর্ডার করতে চাই:\n\nপণ্য: ${name} (${weight})\nপরিমাণ: ${q}টি\nমোট: ${fmtPrice(tot)} (ক্যাশ অন ডেলিভারি)\n\nঅনুগ্রহ করে আমার অর্ডারটি গ্রহণ করুন।`;
+        window.open('https://wa.me/8801922379382?text=' + encodeURIComponent(text), '_blank');
+      };
+
+      renderModal();
+      modalBackdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+
+      modalBackdrop.onclick = (e) => {
+        if (e.target === modalBackdrop) {
+          this.closeQuickOrderModal();
+        }
+      };
+    },
+
+    closeQuickOrderModal: function () {
+      const modal = document.getElementById('bb-quick-order-modal');
+      if (modal) {
+        modal.classList.remove('open');
+      }
+      document.body.style.overflow = '';
+    },
+
+    /* ==========================================================================
+       HOMEPAGE COMBO & BUNDLE SPOTLIGHT
+       ========================================================================== */
+    renderComboSpotlight: function (containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      const combos = this.products.filter(p => p.category === 'স্পেশাল কম্বো').slice(0, 4);
+      if (combos.length === 0) return;
+
+      const comboBadges = [
+        { top: 'বেস্টসেলার গিফট বক্স', save: 'সাশ্রয় ৳৭০', items: '৬টি কাঁচের জার: তেঁতুল, বরই, আলুবোখারা, রসুন, কালোজিরা ও রসুন-কালোজিরা মিক্স' },
+        { top: 'রোগ প্রতিরোধক কম্বো', save: 'সাশ্রয় ৳২০০', items: '৪টি স্বাস্থ্যকর জার: প্রিমিয়াম রসুন আচার, কালোজিরা আচার ও মধু-কালোজিরা' },
+        { top: 'পাহাড়ি ও দেশি কম্বো', save: 'সাশ্রয় ৳১৫০', items: 'পাহাড়ি জলপাই, চালতা, কাঁচা আম ও বরইয়ের টক-ঝাল-মিষ্টি অনন্য স্বাদ' },
+        { top: 'শাহি আচার কম্বো', save: 'সাশ্রয় ৳১০০', items: 'পোলাও ও বিরিয়ানির সেরা সঙ্গ: আলুবোখারা, রসুন আচার ও ডালিম আচার' }
+      ];
+
+      let cardsHtml = '';
+      combos.forEach((c, idx) => {
+        const meta = comboBadges[idx] || comboBadges[0];
+        const regPriceHtml = (c.regular_price > c.sale_price)
+          ? `<span class="bb-combo-price-reg">${fmtPrice(c.regular_price)}</span>`
+          : '';
+        const weightText = (c.weights && c.weights.length > 0) ? c.weights.join(', ') : '১.২ কেজি';
+
+        cardsHtml += `
+          <div class="bb-combo-card">
+            <div class="bb-combo-card-img-wrap">
+              <a href="product.html?id=${c.id}">
+                <img src="${c.primary_image || 'Logo/bornobazar-logo.png'}" alt="${escHtml(c.name_bn)}" loading="lazy">
+              </a>
+              <div class="bb-combo-badge-top">
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <span>${meta.top}</span>
+              </div>
+              <div class="bb-combo-savings-badge">${meta.save}</div>
+            </div>
+            <div class="bb-combo-body">
+              <h3 class="bb-combo-title">
+                <a href="product.html?id=${c.id}">${escHtml(c.name_bn)}</a>
+              </h3>
+              <p class="bb-combo-desc">${escHtml(c.description || '')}</p>
+              <div class="bb-combo-items-list">
+                <strong>প্যাকে যা থাকছে:</strong>
+                <span>${meta.items} (${weightText})</span>
+              </div>
+              <div class="bb-combo-footer">
+                <div class="bb-combo-price-row">
+                  <span class="bb-combo-price-current">${fmtPrice(c.sale_price)}</span>
+                  ${regPriceHtml}
+                </div>
+                <div class="bb-card-actions-dual">
+                  <button type="button" class="bb-btn-cart-outline" onclick="Bornobazar.addToCart('${c.id}', '${c.weights ? c.weights[0] : ''}', 1)">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                    </svg>
+                    <span>কার্ট</span>
+                  </button>
+                  <button type="button" class="bb-btn-quick-buy" onclick="Bornobazar.openQuickOrderModal('${c.id}', '${c.weights ? c.weights[0] : ''}', 1)">
+                    <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <span>১-ক্লিকে অর্ডার</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = `
+        <div class="bb-container">
+          <div class="bb-section-header" style="text-align: center; margin-bottom: 28px;">
+            <span class="bb-badge bb-badge-primary" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 8px; font-weight: 700; font-size: 16px; margin-bottom: 10px;">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+              জনপ্রিয় অফার
+            </span>
+            <h2 class="bb-section-title">স্পেশাল কম্বো ও সেভার বান্ডেল</h2>
+            <p class="bb-section-subtitle" style="font-size: 16px; color: var(--bb-text-muted); max-width: 680px; margin: 0 auto;">
+              একসাথে একাধিক খাঁটি স্বাদের আনন্দ নিন — আকর্ষণীয় কম্বো ছাড়ে বেশি সাশ্রয় করুন ও ৬৪ জেলায় দ্রুত ক্যাশ অন ডেলিভারি সুবিধা নিন।
+            </p>
+          </div>
+          <div class="bb-combo-grid">
+            ${cardsHtml}
+          </div>
+        </div>
+      `;
+    },
+
+    /* ==========================================================================
+       PRODUCT PAGE: FREQUENTLY BOUGHT TOGETHER / BUNDLE BOX
+       ========================================================================== */
+    renderBundleBox: function (containerId, currentProduct) {
+      const container = document.getElementById(containerId);
+      if (!container || !currentProduct) return;
+
+      const others = this.products.filter(p => p.id !== currentProduct.id);
+      if (others.length < 2) return;
+
+      const item1 = currentProduct;
+      const item2 = others.find(p => p.id === 'BB-ACH-012') || others[0];
+      const item3 = others.find(p => p.id === 'BB-ACH-009') || others[1];
+
+      const price1 = item1.sale_price;
+      const price2 = item2.sale_price;
+      const price3 = item3.sale_price;
+      const regularSum = price1 + price2 + price3;
+      const discount = 150;
+      const bundlePrice = Math.max(100, regularSum - discount);
+
+      container.innerHTML = `
+        <div class="bb-bundle-box">
+          <div class="bb-bundle-header">
+            <div>
+              <span class="bb-badge bb-badge-primary" style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 8px; font-weight: 700; font-size: 16px; margin-bottom: 6px;">
+                কম্বো অফার
+              </span>
+              <h3 class="bb-bundle-title">একসাথে কিনুন ও সাশ্রয় করুন (Bundle & Save)</h3>
+            </div>
+            <span class="bb-bundle-badge">বিশেষ ছাড় ৳${discount}</span>
+          </div>
+
+          <div class="bb-bundle-items-row">
+            <div class="bb-bundle-single-item">
+              <img src="${item1.primary_image || 'Logo/bornobazar-logo.png'}" alt="${escHtml(item1.name_bn)}" class="bb-bundle-item-img">
+              <div>
+                <div class="bb-bundle-item-title">${escHtml(item1.name_bn)}</div>
+                <div class="bb-bundle-item-price">${fmtPrice(price1)}</div>
+              </div>
+            </div>
+
+            <div class="bb-bundle-plus-icon">+</div>
+
+            <div class="bb-bundle-single-item">
+              <img src="${item2.primary_image || 'Logo/bornobazar-logo.png'}" alt="${escHtml(item2.name_bn)}" class="bb-bundle-item-img">
+              <div>
+                <div class="bb-bundle-item-title">${escHtml(item2.name_bn)}</div>
+                <div class="bb-bundle-item-price">${fmtPrice(price2)}</div>
+              </div>
+            </div>
+
+            <div class="bb-bundle-plus-icon">+</div>
+
+            <div class="bb-bundle-single-item">
+              <img src="${item3.primary_image || 'Logo/bornobazar-logo.png'}" alt="${escHtml(item3.name_bn)}" class="bb-bundle-item-img">
+              <div>
+                <div class="bb-bundle-item-title">${escHtml(item3.name_bn)}</div>
+                <div class="bb-bundle-item-price">${fmtPrice(price3)}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bb-bundle-checkout-bar">
+            <div class="bb-bundle-pricing-info">
+              <div>
+                <div style="font-size: 16px; color: var(--bb-text-muted);">বান্ডেল মোট মূল্য (৩টি পণ্য):</div>
+                <div style="display: flex; align-items: baseline; gap: 8px;">
+                  <span class="bb-bundle-total-price">${fmtPrice(bundlePrice)}</span>
+                  <span class="bb-bundle-old-price">${fmtPrice(regularSum)}</span>
+                  <span class="bb-bundle-save-tag">(৳${discount} সাশ্রয়!)</span>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button type="button" class="bb-btn bb-btn-secondary" style="font-size: 16px; padding: 10px 18px;" onclick="Bornobazar.addBundleToCart(['${item1.id}', '${item2.id}', '${item3.id}'], ${bundlePrice})">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                </svg>
+                <span>কার্টে যোগ করুন</span>
+              </button>
+              <button type="button" class="bb-btn bb-btn-primary" style="font-size: 16px; padding: 10px 20px;" onclick="Bornobazar.quickOrderBundle(['${item1.id}', '${item2.id}', '${item3.id}'], ${bundlePrice}, '${escHtml(item1.name_bn)} + ${escHtml(item2.name_bn)} + ${escHtml(item3.name_bn)}')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                <span>১-ক্লিকে বান্ডেল অর্ডার</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    },
+
+    addBundleToCart: function (productIds, bundlePrice) {
+      if (!Array.isArray(productIds)) return;
+      const perItemDiscount = Math.floor(150 / productIds.length);
+      productIds.forEach(id => {
+        const prod = this.findProduct(id);
+        if (prod) {
+          const w = (prod.weights && prod.weights[0]) || 'স্ট্যান্ডার্ড';
+          const p = Math.max(50, prod.sale_price - perItemDiscount);
+          const existing = this.cart.find(x => x.id === prod.id && x.weight === w);
+          if (existing) {
+            existing.qty += 1;
+          } else {
+            this.cart.push({
+              id: prod.id,
+              name_bn: prod.name_bn + ' (বান্ডেল অফার)',
+              name_en: prod.name_en,
+              image: prod.primary_image,
+              weight: w,
+              price: p,
+              qty: 1
+            });
+          }
+        }
+      });
+      this.saveCart();
+      this.showToast('৩-প্যাক স্পেশাল বান্ডেল কার্টে যোগ করা হয়েছে (৳১৫০ ছাড়)!');
+      this.openCartDrawer();
+    },
+
+    quickOrderBundle: function (productIds, bundlePrice, bundleTitle) {
+      const firstProd = this.findProduct(productIds[0]);
+      if (!firstProd) return;
+      const syntheticBundle = {
+        id: 'BUNDLE-' + Date.now(),
+        name_bn: '৩-প্যাক স্পেশাল আচার বান্ডেল (' + bundleTitle + ')',
+        sale_price: bundlePrice,
+        regular_price: bundlePrice + 150,
+        primary_image: firstProd.primary_image,
+        weights: ['৩টি জারের কম্বো সেট'],
+        weight_pricing: { '৩টি জারের কম্বো সেট': bundlePrice }
+      };
+
+      this.products.unshift(syntheticBundle);
+      this.openQuickOrderModal(syntheticBundle.id, '৩টি জারের কম্বো সেট', 1);
     },
 
     /* ==========================================================================
@@ -2090,6 +2591,11 @@
             </div>
           `;
         }
+      }
+
+      // Render Frequently Bought Together / Bundle & Save
+      if (document.getElementById('pd-bundle-wrap')) {
+        this.renderBundleBox('pd-bundle-wrap', p);
       }
 
       // Render Shoppable Video Reels (Alpino & Instagram Reels)
