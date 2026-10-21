@@ -943,18 +943,117 @@
   const SVG_STAR_LG = '<svg width="22" height="22" fill="#D97706" viewBox="0 0 20 20" style="display:inline-block; vertical-align:middle;"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
   const SVG_STARS_5_LG = `<div class="stars" style="display:flex; justify-content:center; gap:4px; margin: 6px 0;">${SVG_STAR_LG}${SVG_STAR_LG}${SVG_STAR_LG}${SVG_STAR_LG}${SVG_STAR_LG}</div>`;
 
+  // Shoppable Video Reels Configuration (Instagram Reels & Products)
+  const BORNOBAZAR_REELS = [
+    {
+      id: 'DcNx1IeiNzS',
+      title: '৬ প্যাক আচার কম্বো বক্স আনবক্সিং',
+      shortTitle: '৬ প্যাক কম্বো',
+      url: 'https://www.instagram.com/bornobazar/reel/DcNx1IeiNzS/',
+      poster: 'All images/724500930_995387276435925_6032589404291467890_n.jpg',
+      productId: 'BB-COM-001',
+      productName: '৬ প্যাক আচার কম্বো',
+      productThumb: 'All images/724500930_995387276435925_6032589404291467890_n.jpg',
+      price: 1190,
+      regularPrice: 1260,
+      weight: '1.2 kg'
+    },
+    {
+      id: 'DcLiLYpkaYx',
+      title: 'ঐতিহ্যবাহী খাঁটি রসুন আচার',
+      shortTitle: 'রসুন আচার',
+      url: 'https://www.instagram.com/bornobazar/reel/DcLiLYpkaYx/',
+      poster: 'All images/761355190_1034052569236062_78667506752820005_n.jpg',
+      productId: 'BB-ACH-012',
+      productName: 'রসুন আচার (স্পেশাল)',
+      productThumb: 'All images/761355190_1034052569236062_78667506752820005_n.jpg',
+      price: 240,
+      regularPrice: 280,
+      weight: '200 gm'
+    },
+    {
+      id: 'DcyYuy4Coi7',
+      title: 'খাঁটি সরিষার তেলে রোদে তৈরি আলুবোখারা আচার',
+      shortTitle: 'আলুবোখারা আচার',
+      url: 'https://www.instagram.com/bornobazar/reel/DcyYuy4Coi7/',
+      poster: 'All images/779787836_1049495257691793_4108399455579486072_n.jpg',
+      productId: 'BB-ACH-002',
+      productName: 'আলুবোখারা আচার',
+      productThumb: 'All images/779787836_1049495257691793_4108399455579486072_n.jpg',
+      price: 240,
+      regularPrice: 280,
+      weight: '200 gm'
+    },
+    {
+      id: 'Dc8fMd4jSwf',
+      title: 'টক-ঝাল-মিষ্টি সেরা স্বাদের তেঁতুল আচার',
+      shortTitle: 'তেঁতুল আচার',
+      url: 'https://www.instagram.com/bornobazar/reel/Dc8fMd4jSwf/',
+      poster: 'All images/813976083_1073010388673613_8899924605867364727_n.jpg',
+      productId: 'BB-ACH-016',
+      productName: 'তেঁতুল আচার',
+      productThumb: 'All images/813976083_1073010388673613_8899924605867364727_n.jpg',
+      price: 380,
+      regularPrice: 420,
+      weight: '400 gm'
+    },
+    {
+      id: 'Dc73IHzAdLp',
+      title: 'নিউট্রি আচার কম্বো — ৩টি সেরা ফ্লেভার',
+      shortTitle: 'নিউট্রি কম্বো',
+      url: 'https://www.instagram.com/bornobazar/reel/Dc73IHzAdLp/',
+      poster: 'All images/788601539_1056888763619109_5968941487902862885_n.jpg',
+      productId: 'BB-COM-006',
+      productName: 'নিউট্রি আচার কম্বো',
+      productThumb: 'All images/788601539_1056888763619109_5968941487902862885_n.jpg',
+      price: 890,
+      regularPrice: 1090,
+      weight: '800 gm'
+    },
+    {
+      id: 'DbdHGupjlQu',
+      title: 'গ্রামের বাড়ির রোদে শুকানো বরই আচার',
+      shortTitle: 'বরই আচার',
+      url: 'https://www.instagram.com/bornobazar/reel/DbdHGupjlQu/',
+      poster: 'All images/807386813_1076326418342010_1423256031986250910_n.jpg',
+      productId: 'BB-ACH-018',
+      productName: 'বরই আচার',
+      productThumb: 'All images/807386813_1076326418342010_1423256031986250910_n.jpg',
+      price: 380,
+      regularPrice: 420,
+      weight: '400 gm'
+    },
+    {
+      id: 'DbYAkAfCQNm',
+      title: 'রসুন ও কালোজিরা বিশেষ স্বাস্থ্যকর আচার',
+      shortTitle: 'রসুন-কালোজিরা',
+      url: 'https://www.instagram.com/bornobazar/reel/DbYAkAfCQNm/',
+      poster: 'All images/778279709_1047741551200497_8987538511452370084_n.jpg',
+      productId: 'BB-ACH-025',
+      productName: 'রসুন কালোজিরা আচার',
+      productThumb: 'All images/778279709_1047741551200497_8987538511452370084_n.jpg',
+      price: 380,
+      regularPrice: 450,
+      weight: '400 gm'
+    }
+  ];
+
   // Global App State
   window.Bornobazar = {
     products: MASTER_CATALOG,
+    reels: BORNOBAZAR_REELS,
     cart: [],
     shippingRate: 70, // 70 BDT inside Dhaka, 130 BDT outside Dhaka
     deliveryArea: 'inside_dhaka',
+    currentReelIndex: 0,
+    _updateStickyBar: null,
 
     init: function () {
       this.loadCart();
       this.loadProductsSync();
       this.bindGlobalEvents();
       this.updateCartBadges();
+      this.initReelsModalEvents();
       
       // Page specific inits
       if (document.getElementById('bb-hero-slides')) {
@@ -965,6 +1064,9 @@
       }
       if (document.getElementById('home-featured-grid')) {
         this.initHomePage();
+      }
+      if (document.getElementById('home-reels-section')) {
+        this.renderReelsSection('home-reels-section');
       }
       if (document.getElementById('pd-info') || document.getElementById('single-product-app')) {
         this.initProductPage();
@@ -1764,6 +1866,10 @@
               <span>${fmtPrice(v.price)}</span>
             </button>
           `).join('');
+
+          if (this._updateStickyBar) {
+            this._updateStickyBar();
+          }
         };
 
         chipsEl.addEventListener('click', e => {
@@ -1963,6 +2069,392 @@
           `;
         }
       }
+
+      // Render Shoppable Video Reels (Alpino & Instagram Reels)
+      if (document.getElementById('pd-reels-section')) {
+        this.renderReelsSection('pd-reels-section');
+      }
+
+      // Render Alpino Comparison Matrix
+      if (document.getElementById('pd-comparison-section')) {
+        this.renderComparisonSection('pd-comparison-section', p);
+      }
+
+      // Render Alpino 4-Step Heritage Artisan Process
+      if (document.getElementById('pd-artisan-section')) {
+        this.renderArtisanSection('pd-artisan-section');
+      }
+
+      // Initialize Alpino Sticky Buy Bar
+      this.initStickyBuyBar(p, variants, () => vi, () => qty);
+    },
+
+    /* ==========================================================================
+       SHOPPABLE VIDEO REELS & ALPINO COMPONENTS
+       ========================================================================== */
+    renderReelsSection: function (containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const carouselId = 'carousel-' + containerId;
+      let cardsHtml = '';
+
+      BORNOBAZAR_REELS.forEach((r, idx) => {
+        const regPriceHtml = (r.regularPrice && r.regularPrice > r.price)
+          ? ` <s style="font-size: 13px; color: var(--bb-text-subtle); margin-left: 4px;">${fmtPrice(r.regularPrice)}</s>`
+          : '';
+
+        cardsHtml += `
+          <div class="bb-reel-card" data-reel-idx="${idx}" onclick="if(!event.target.closest('.bb-reel-product-card')) Bornobazar.openReelModal(${idx})">
+            <img class="bb-reel-poster" src="${r.poster}" alt="${escHtml(r.title)}" loading="lazy">
+            <div class="bb-reel-overlay"></div>
+            <button type="button" class="bb-reel-play-btn" aria-label="ভিডিও চালান" onclick="Bornobazar.openReelModal(${idx}); event.stopPropagation();">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="8 5 19 12 8 19 8 5"/>
+              </svg>
+            </button>
+            <div class="bb-reel-product-card" onclick="event.stopPropagation()">
+              <div class="bb-reel-product-top">
+                <img class="bb-reel-product-thumb" src="${r.productThumb}" alt="${escHtml(r.productName)}" loading="lazy">
+                <div class="bb-reel-product-details">
+                  <div class="bb-reel-product-title" title="${escHtml(r.productName)}">${escHtml(r.shortTitle || r.productName)}</div>
+                  <div class="bb-reel-product-price">${fmtPrice(r.price)}${regPriceHtml}</div>
+                </div>
+                <a href="product.html?id=${r.productId}" class="bb-reel-ext-btn" title="বিস্তারিত দেখুন" aria-label="বিস্তারিত দেখুন">
+                  <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="bb-reel-btn-row">
+                <button type="button" class="bb-reel-add-cart-btn" onclick="Bornobazar.addToCart('${r.productId}', '${r.weight}')">
+                  ADD TO CART
+                </button>
+                <button type="button" class="bb-reel-cart-icon-btn" onclick="Bornobazar.addToCart('${r.productId}', '${r.weight}')" aria-label="কার্টে যোগ করুন">
+                  <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = `
+        <div class="bb-container">
+          <div class="bb-reels-header">
+            <div class="bb-reels-header-left">
+              <span class="bb-reels-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
+                ভিডিও গ্যালারি ও রিভিউ
+              </span>
+              <h2 class="bb-reels-title">আমাদের তৈরি আচার ও কাস্টমারদের গল্প</h2>
+              <p class="bb-reels-subtitle">সরাসরি দেখে অর্ডার করুন মেহেরপুরের খাঁটি স্বাদের ঘরোয়া আচার</p>
+            </div>
+            <div class="bb-reels-nav-btns">
+              <button type="button" class="bb-reels-nav-btn bb-reels-prev" data-carousel="${carouselId}" aria-label="পূর্ববর্তী ভিডিও">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <button type="button" class="bb-reels-nav-btn bb-reels-next" data-carousel="${carouselId}" aria-label="পরবর্তী ভিডিও">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="bb-reels-carousel" id="${carouselId}">
+            ${cardsHtml}
+          </div>
+        </div>
+      `;
+
+      this.initReelsControls(carouselId);
+    },
+
+    initReelsControls: function (carouselId) {
+      const carousel = document.getElementById(carouselId);
+      if (!carousel) return;
+      const prevBtn = document.querySelector(`.bb-reels-prev[data-carousel="${carouselId}"]`);
+      const nextBtn = document.querySelector(`.bb-reels-next[data-carousel="${carouselId}"]`);
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          carousel.scrollBy({ left: -260, behavior: 'smooth' });
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          carousel.scrollBy({ left: 260, behavior: 'smooth' });
+        });
+      }
+    },
+
+    openReelModal: function (idx) {
+      if (idx < 0) idx = BORNOBAZAR_REELS.length - 1;
+      if (idx >= BORNOBAZAR_REELS.length) idx = 0;
+      this.currentReelIndex = idx;
+      const r = BORNOBAZAR_REELS[idx];
+      if (!r) return;
+
+      const modal = document.getElementById('reel-modal');
+      const iframeWrap = document.getElementById('reel-iframe-container');
+      const drawer = document.getElementById('reel-modal-drawer');
+      if (!modal || !iframeWrap) return;
+
+      iframeWrap.innerHTML = `
+        <iframe src="https://www.instagram.com/reel/${r.id}/embed/" frameborder="0" scrolling="no" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="${escHtml(r.title)}"></iframe>
+      `;
+
+      if (drawer) {
+        drawer.innerHTML = `
+          <div class="bb-reel-modal-p-info">
+            <img src="${r.productThumb}" alt="${escHtml(r.productName)}" class="bb-reel-modal-p-img">
+            <div>
+              <div style="font-size: 15px; font-weight: 700; color: var(--bb-text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 170px;">
+                ${escHtml(r.productName)}
+              </div>
+              <div style="font-size: 14px; font-weight: 700; color: var(--bb-primary);">
+                ${fmtPrice(r.price)}
+                ${r.regularPrice > r.price ? `<s style="font-size: 12px; color: var(--bb-text-subtle); margin-left: 4px;">${fmtPrice(r.regularPrice)}</s>` : ''}
+              </div>
+            </div>
+          </div>
+          <div class="bb-reel-modal-actions">
+            <button type="button" class="bb-btn bb-btn-primary bb-btn-sm" style="font-size: 14px; padding: 6px 12px;" onclick="Bornobazar.addToCart('${r.productId}', '${r.weight}')">
+              কার্টে যোগ করুন
+            </button>
+            <a href="${r.url}" target="_blank" rel="noopener" class="bb-btn bb-btn-secondary bb-btn-sm" style="font-size: 14px; padding: 6px 10px; display: inline-flex; align-items: center; gap: 4px;" title="ইনস্টাগ্রামে দেখুন">
+              <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              <span>রিল</span>
+            </a>
+          </div>
+        `;
+      }
+
+      modal.classList.add('open');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    },
+
+    closeReelModal: function () {
+      const modal = document.getElementById('reel-modal');
+      const iframeWrap = document.getElementById('reel-iframe-container');
+      if (modal) {
+        modal.classList.remove('open');
+        modal.classList.remove('active');
+      }
+      if (iframeWrap) iframeWrap.innerHTML = '';
+      document.body.style.overflow = '';
+    },
+
+    initReelsModalEvents: function () {
+      const modal = document.getElementById('reel-modal');
+      if (!modal) return;
+      const closeBtn = document.getElementById('reel-modal-close');
+      const prevBtn = document.getElementById('reel-modal-prev');
+      const nextBtn = document.getElementById('reel-modal-next');
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.closeReelModal();
+        });
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.openReelModal(this.currentReelIndex - 1);
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.openReelModal(this.currentReelIndex + 1);
+        });
+      }
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          this.closeReelModal();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('open') && !modal.classList.contains('active')) return;
+        if (e.key === 'Escape') this.closeReelModal();
+        if (e.key === 'ArrowLeft') this.openReelModal(this.currentReelIndex - 1);
+        if (e.key === 'ArrowRight') this.openReelModal(this.currentReelIndex + 1);
+      });
+    },
+
+    renderComparisonSection: function (containerId, p) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      const checkIcon = `<span style="display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background: #059669; color:#fff; margin-right:8px; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>`;
+      const crossIcon = `<span style="display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background: #E5E7EB; color:#6B7280; margin-right:8px; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span>`;
+
+      container.innerHTML = `
+        <div class="bb-container">
+          <div class="bb-section-header" style="text-align: center; margin-bottom: 24px;">
+            <span class="bb-badge bb-badge-primary" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 8px; font-weight: 700; font-size: 16px; margin-bottom: 10px;">
+              গুণগত মানের তুলনামূলক পর্যালোচনা
+            </span>
+            <h2 class="bb-section-title">কেন বর্ণবাজার সবার চেয়ে সেরা ও আলাদা?</h2>
+            <p class="bb-section-subtitle" style="font-size: 16px; color: var(--bb-text-muted); max-width: 680px; margin: 0 auto;">
+              খাঁটি সরিষার তেলের ঝাঁজ, স্বাভাবিক সূর্যের আলোয় জারণ ও শতভাগ স্বাস্থ্যসম্মত ঘরোয়া বিশুদ্ধতা।
+            </p>
+          </div>
+
+          <div class="bb-comparison-table-wrap">
+            <table class="bb-comp-table">
+              <thead>
+                <tr>
+                  <th style="width: 28%;">উপাদান ও উৎপাদন মানদণ্ড</th>
+                  <th class="bb-highlight-col" style="width: 40%;">
+                    <div style="font-size: 18px; font-weight: 700;">বর্ণবাজার (Bornobazar)</div>
+                    <div style="font-size: 14px; font-weight: 400; opacity: 0.95; margin-top: 2px;">ঐতিহ্যবাহী খাঁটি আচার</div>
+                  </th>
+                  <th style="width: 32%;">সাধারণ বাজার ও অন্যান্য ব্র্যান্ড</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>তেলের বিশুদ্ধতা</strong></td>
+                  <td class="bb-highlight-col"><div style="display:flex; align-items:center;">${checkIcon}<span>১০০% কাঠের ঘানিভাঙা খাঁটি সরিষার তেল</span></div></td>
+                  <td><div style="display:flex; align-items:center;">${crossIcon}<span>সস্তা পাম তেল অথবা ক্ষতিকর মিশ্র তেল</span></div></td>
+                </tr>
+                <tr>
+                  <td><strong>রোদে শুকানোর পদ্ধতি</strong></td>
+                  <td class="bb-highlight-col"><div style="display:flex; align-items:center;">${checkIcon}<span>স্বাভাবিক উজ্জ্বল রোদে ধীরে শুকানো ও জারণ</span></div></td>
+                  <td><div style="display:flex; align-items:center;">${crossIcon}<span>কৃত্রিম বয়লার বা গ্যাস ওভেনে দ্রুত সেদ্ধ</span></div></td>
+                </tr>
+                <tr>
+                  <td><strong>সংরক্ষণ ও প্রিজারভেটিভ</strong></td>
+                  <td class="bb-highlight-col"><div style="display:flex; align-items:center;">${checkIcon}<span>সম্পূর্ণ কেমিক্যাল ও ক্ষতিকর ভিনেগার মুক্ত</span></div></td>
+                  <td><div style="display:flex; align-items:center;">${crossIcon}<span>বাণিজ্যিক সিন্থেটিক কেমিক্যাল ও কৃত্রিম রং</span></div></td>
+                </tr>
+                <tr>
+                  <td><strong>বিএসটিআই লাইসেন্স</strong></td>
+                  <td class="bb-highlight-col"><div style="display:flex; align-items:center;">${checkIcon}<span>বিএসটিআই অনুমোদিত মান (BDS:CAC-260)</span></div></td>
+                  <td><div style="display:flex; align-items:center;">${crossIcon}<span>অনুমোদনহীন বা অস্বাস্থ্যকর উৎপাদন উৎস</span></div></td>
+                </tr>
+                <tr>
+                  <td><strong>প্যাকেজিং ও জার</strong></td>
+                  <td class="bb-highlight-col"><div style="display:flex; align-items:center;">${checkIcon}<span>প্রিমিয়াম ফুড-গ্রেড কাঁচের জার ও সুরক্ষিত সিল</span></div></td>
+                  <td><div style="display:flex; align-items:center;">${crossIcon}<span>পাতলা ক্ষতিকর প্লাস্টিক কৌটা</span></div></td>
+                </tr>
+                <tr>
+                  <td><strong>স্বাদের নিশ্চয়তা</strong></td>
+                  <td class="bb-highlight-col"><div style="display:flex; align-items:center;">${checkIcon}<span>মেহেরপুরের গ্রামীণ মা-খালাদের ঐতিহ্যবাহী রেসিপি</span></div></td>
+                  <td><div style="display:flex; align-items:center;">${crossIcon}<span>বাণিজ্যিক কৃত্রিম এসেন্স ও কেমিক্যাল ফ্লেভার</span></div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    },
+
+    renderArtisanSection: function (containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      container.innerHTML = `
+        <div class="bb-container">
+          <div class="bb-section-header" style="text-align: center; margin-bottom: 24px;">
+            <span class="bb-badge bb-badge-primary" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 8px; font-weight: 700; font-size: 16px; margin-bottom: 10px;">
+              প্রস্তুতপ্রণালী ও বিশুদ্ধতা
+            </span>
+            <h2 class="bb-section-title">যেভাবে তৈরি হয় আপনার পছন্দের বর্ণবাজার আচার</h2>
+            <p class="bb-section-subtitle" style="font-size: 16px; color: var(--bb-text-muted); max-width: 650px; margin: 0 auto;">
+              ঐতিহ্য আর আধুনিক খাদ্যমানের নিখুঁত সমন্বয়ে ৪টি সুনির্দিষ্ট ধাপে প্রস্তুত হয় আমাদের প্রতিটি জার।
+            </p>
+          </div>
+
+          <div class="bb-artisan-grid">
+            <div class="bb-artisan-card">
+              <div class="bb-artisan-step-num">১</div>
+              <h3 class="bb-artisan-card-title">বাছাইকৃত দেশি ফল সংগ্রহ</h3>
+              <p class="bb-artisan-card-desc">মেহেরপুরের নিজস্ব ও স্থানীয় কৃষকদের বাগান থেকে পরিপক্ক আম, বরই, রসুন, জলপাই ও তেঁতুল সরাসরি সংগ্রহ করা হয়।</p>
+            </div>
+
+            <div class="bb-artisan-card">
+              <div class="bb-artisan-step-num">২</div>
+              <h3 class="bb-artisan-card-title">খোলা রোদে প্রাকৃতিক জারণ</h3>
+              <p class="bb-artisan-card-desc">কোনো বয়লার নয়—খোলা আকাশের নিচে মিষ্টি কড়া রোদে শুকিয়ে উপাদানের প্রাকৃতিক আর্দ্রতা দূর করে স্বাদ বহুগুণ বৃদ্ধি করা হয়।</p>
+            </div>
+
+            <div class="bb-artisan-card">
+              <div class="bb-artisan-step-num">৩</div>
+              <h3 class="bb-artisan-card-title">ঘানিভাঙা সরিষার তেল ও মশলা</h3>
+              <p class="bb-artisan-card-desc">১০০% খাঁটি ঝাঁজালো ঘানিভাঙা সরিষার তেল ও ঘরে ভাজা পাঁচফোড়ন মশলায় মাখিয়ে দীর্ঘস্থায়ী প্রাকৃতিক সংরক্ষণ নিশ্চিত করা হয়।</p>
+            </div>
+
+            <div class="bb-artisan-card">
+              <div class="bb-artisan-step-num">৪</div>
+              <h3 class="bb-artisan-card-title">ফুড-গ্রেড এয়ার-টাইট গ্লাস জার</h3>
+              <p class="bb-artisan-card-desc">পরিশোধিত কাঁচের জারে সিলপ্যাক করে স্বাস্থ্যসম্মত উপায়ে সারা দেশে ক্যাশ অন ডেলিভারিতে পৌঁছে দেওয়া হয়।</p>
+            </div>
+          </div>
+        </div>
+      `;
+    },
+
+    initStickyBuyBar: function (p, variants, getVi, getQty) {
+      const bar = document.getElementById('sticky-buy-bar');
+      if (!bar || !p) return;
+
+      const imgEl = document.getElementById('sticky-bar-img');
+      const titleEl = document.getElementById('sticky-bar-title');
+      const weightEl = document.getElementById('sticky-bar-weight');
+      const priceEl = document.getElementById('sticky-bar-price');
+      const addBtn = document.getElementById('sticky-bar-add');
+      const buyBtn = document.getElementById('sticky-bar-buy');
+
+      if (imgEl) imgEl.src = p.primary_image || 'Logo/bornobazar-logo.png';
+      if (titleEl) titleEl.textContent = p.name_bn;
+
+      const updateStickyMeta = () => {
+        const vi = getVi();
+        const qty = getQty();
+        const v = variants[vi] || variants[0];
+        if (weightEl) weightEl.textContent = v.w;
+        if (priceEl) priceEl.textContent = fmtPrice(v.price * qty);
+      };
+
+      updateStickyMeta();
+      this._updateStickyBar = updateStickyMeta;
+
+      if (addBtn) {
+        addBtn.onclick = () => {
+          const vi = getVi();
+          const qty = getQty();
+          this.addToCart(p.id, variants[vi].w, qty);
+        };
+      }
+
+      if (buyBtn) {
+        buyBtn.onclick = () => {
+          const vi = getVi();
+          const qty = getQty();
+          this.addToCart(p.id, variants[vi].w, qty);
+          window.location.href = 'checkout.html';
+        };
+      }
+
+      // Scroll listener: show sticky bar once past main buy buttons
+      const triggerEl = document.getElementById('buy-now') || document.getElementById('pd-price');
+      if (!triggerEl) return;
+
+      window.addEventListener('scroll', () => {
+        const rect = triggerEl.getBoundingClientRect();
+        if (rect.bottom < 0) {
+          bar.classList.add('visible');
+        } else {
+          bar.classList.remove('visible');
+        }
+      }, { passive: true });
     },
 
     /* ==========================================================================

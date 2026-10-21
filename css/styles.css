@@ -2524,3 +2524,657 @@ details.faq .fa-body {
 .bb-cart-drawer {
   z-index: 999;
 }
+
+/* ==========================================================================
+   SHOPPABLE VIDEO REELS SECTION (INSPIRED BY ALPINO & TAZOH)
+   ========================================================================== */
+.bb-reels-section {
+  padding: 50px 0 60px;
+  background-color: var(--bb-bg-canvas);
+  position: relative;
+  overflow: hidden;
+}
+
+.bb-reels-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.bb-reels-title-wrap {
+  max-width: 650px;
+}
+
+.bb-reels-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--bb-primary-subtle);
+  border: 1px solid var(--bb-primary-border);
+  color: var(--bb-primary);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.bb-reels-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--bb-text-main);
+  line-height: 1.3;
+}
+
+.bb-reels-sub {
+  font-size: 16px;
+  color: var(--bb-text-muted);
+  margin-top: 6px;
+}
+
+.bb-reels-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.bb-reels-nav-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--bb-border-medium);
+  background-color: var(--bb-bg-surface);
+  color: var(--bb-text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.bb-reels-nav-btn:hover {
+  background-color: var(--bb-primary);
+  color: #fff;
+  border-color: var(--bb-primary);
+}
+
+/* Reels Carousel Track */
+.bb-reels-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  padding: 8px 4px 20px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--bb-border-medium) transparent;
+}
+
+.bb-reels-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+.bb-reels-carousel::-webkit-scrollbar-track {
+  background: transparent;
+}
+.bb-reels-carousel::-webkit-scrollbar-thumb {
+  background: var(--bb-border-medium);
+  border-radius: 8px;
+}
+
+/* Individual Reel Card (9:16 Aspect Ratio) */
+.bb-reel-card {
+  flex: 0 0 250px;
+  width: 250px;
+  height: 430px;
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  scroll-snap-align: start;
+  background-color: #241E1A;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+@media (max-width: 576px) {
+  .bb-reel-card {
+    flex: 0 0 215px;
+    width: 215px;
+    height: 380px;
+  }
+}
+
+.bb-reel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+}
+
+.bb-reel-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bb-reel-card:hover .bb-reel-poster {
+  transform: scale(1.05);
+}
+
+.bb-reel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.72) 100%);
+  pointer-events: none;
+}
+
+.bb-reel-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 2;
+}
+
+.bb-reel-play-btn {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  z-index: 2;
+}
+
+.bb-reel-card:hover .bb-reel-play-btn {
+  transform: translate(-50%, -50%) scale(1.12);
+  background: var(--bb-primary);
+  border-color: var(--bb-primary);
+}
+
+/* Attached Shoppable Product Card Overlay */
+.bb-reel-product-card {
+  position: absolute;
+  bottom: 10px;
+  left: 8px;
+  right: 8px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+  z-index: 3;
+}
+
+.bb-reel-product-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.bb-reel-product-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--bb-border-hairline);
+  background: #f0ebe2;
+}
+
+.bb-reel-product-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.bb-reel-product-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--bb-text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.bb-reel-product-price {
+  font-family: var(--font-english);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--bb-primary);
+}
+
+.bb-reel-ext-btn {
+  color: var(--bb-text-muted);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.bb-reel-ext-btn:hover {
+  color: var(--bb-primary);
+}
+
+.bb-reel-btn-row {
+  display: flex;
+  gap: 6px;
+}
+
+.bb-reel-add-cart-btn {
+  flex: 1;
+  background-color: #1E6B38; /* Green button matching screenshot */
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: background-color 0.2s;
+}
+
+.bb-reel-add-cart-btn:hover {
+  background-color: #16532B;
+}
+
+.bb-reel-cart-icon-btn {
+  background-color: #1E6B38;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+
+.bb-reel-cart-icon-btn:hover {
+  background-color: #16532B;
+}
+
+/* Lightbox Reel Video Modal */
+.bb-reel-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.bb-reel-modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.bb-reel-modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 85vh;
+  max-height: 750px;
+  background-color: #000;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+}
+
+.bb-reel-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: background 0.2s;
+}
+
+.bb-reel-modal-close:hover {
+  background: var(--bb-primary);
+}
+
+.bb-reel-modal-nav-prev,
+.bb-reel-modal-nav-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.2s;
+}
+
+.bb-reel-modal-nav-prev { left: -54px; }
+.bb-reel-modal-nav-next { right: -54px; }
+
+@media (max-width: 600px) {
+  .bb-reel-modal-nav-prev { left: 8px; }
+  .bb-reel-modal-nav-next { right: 8px; }
+}
+
+.bb-reel-modal-nav-prev:hover,
+.bb-reel-modal-nav-next:hover {
+  background: var(--bb-primary);
+}
+
+.bb-reel-modal-iframe-wrap {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+
+.bb-reel-modal-iframe-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.bb-reel-modal-drawer {
+  background: #fff;
+  padding: 12px 14px;
+  border-top: 1px solid var(--bb-border-hairline);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  z-index: 10;
+}
+
+.bb-reel-modal-p-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.bb-reel-modal-p-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--bb-border-hairline);
+}
+
+.bb-reel-modal-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   ALPINO-INSPIRED COMPARISON TABLE (BORNOBAZAR VS OTHERS)
+   ========================================================================== */
+.bb-comparison-section {
+  padding: 60px 0;
+  background-color: var(--bb-bg-warm);
+  border-top: 1px solid var(--bb-border-hairline);
+  border-bottom: 1px solid var(--bb-border-hairline);
+}
+
+.bb-comparison-table-wrap {
+  background-color: var(--bb-bg-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--bb-border-hairline);
+  overflow-x: auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.bb-comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  min-width: 620px;
+}
+
+.bb-comp-table th,
+.bb-comp-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--bb-border-hairline);
+}
+
+.bb-comp-table th {
+  background-color: #F8F5EE;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--bb-text-main);
+}
+
+.bb-comp-table th.bb-highlight-col {
+  background-color: var(--bb-primary);
+  color: #fff;
+  text-align: center;
+}
+
+.bb-comp-table td.bb-highlight-col {
+  background-color: rgba(197, 30, 37, 0.03);
+  font-weight: 600;
+  color: var(--bb-primary-deep);
+  border-left: 2px solid var(--bb-primary);
+  border-right: 2px solid var(--bb-primary);
+}
+
+.bb-comp-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   ALPINO-INSPIRED 4-STEP ARTISAN JOURNEY
+   ========================================================================== */
+.bb-artisan-section {
+  padding: 60px 0;
+  background-color: var(--bb-bg-canvas);
+}
+
+.bb-artisan-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+  margin-top: 28px;
+}
+
+@media (min-width: 576px) {
+  .bb-artisan-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .bb-artisan-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.bb-artisan-card {
+  background-color: var(--bb-bg-surface);
+  border: 1px solid var(--bb-border-hairline);
+  border-radius: var(--radius-md);
+  padding: 24px 20px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.bb-artisan-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.bb-artisan-step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--bb-primary);
+  color: #fff;
+  font-family: var(--font-english);
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+}
+
+.bb-artisan-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--bb-text-main);
+  margin-bottom: 8px;
+}
+
+.bb-artisan-card-desc {
+  font-size: 15px;
+  color: var(--bb-text-muted);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   ALPINO-INSPIRED STICKY ADD TO CART BAR (PDP)
+   ========================================================================== */
+.bb-sticky-buy-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid var(--bb-border-medium);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+  padding: 10px 0;
+  z-index: 100;
+  transform: translateY(110%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bb-sticky-buy-bar.visible {
+  transform: translateY(0);
+}
+
+.bb-sticky-buy-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.bb-sticky-product-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.bb-sticky-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  border: 1px solid var(--bb-border-hairline);
+  flex-shrink: 0;
+}
+
+.bb-sticky-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--bb-text-main);
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bb-sticky-weight {
+  font-size: 14px;
+  color: var(--bb-text-muted);
+}
+
+.bb-sticky-price {
+  font-family: var(--font-english);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--bb-primary);
+  white-space: nowrap;
+}
+
+.bb-sticky-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 576px) {
+  .bb-sticky-product-meta div {
+    display: none;
+  }
+}

@@ -758,6 +758,9 @@
       </div>
     </section>
 
+    <!-- SHOPPABLE VIDEO REELS SECTION (WATCH & SHOP) -->
+    <section class="bb-reels-section" id="home-reels-section"></section>
+
     <!-- RECIPE & DINING PAIRINGS (BENGALI TRADITION) -->
     <section style="padding: var(--sp-10) 0; background-color: var(--bb-bg-canvas);">
       <div class="bb-container">
@@ -944,6 +947,35 @@
       </div>
     </div>
   </aside>
+
+  <!-- SHOPPABLE REEL VIDEO MODAL -->
+  <div class="bb-reel-modal-backdrop" id="reel-modal" role="dialog" aria-modal="true" aria-label="ভিডিও রিল প্লেয়ার">
+    <div class="bb-reel-modal-dialog">
+      <button type="button" class="bb-reel-modal-close" id="reel-modal-close" aria-label="বন্ধ করুন">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+      <button type="button" class="bb-reel-modal-nav-prev" id="reel-modal-prev" aria-label="পূর্ববর্তী রিল">
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <button type="button" class="bb-reel-modal-nav-next" id="reel-modal-next" aria-label="পরবর্তী রিল">
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+        </svg>
+      </button>
+
+      <div class="bb-reel-modal-iframe-wrap" id="reel-iframe-container">
+        <!-- iframe injected dynamically -->
+      </div>
+
+      <div class="bb-reel-modal-drawer" id="reel-modal-drawer">
+        <!-- Attached product card injected dynamically -->
+      </div>
+    </div>
+  </div>
 
   <!-- Script -->
   <script src="data/products-data.js"></script>
