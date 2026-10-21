@@ -3434,33 +3434,52 @@
 
       if (addBtn) {
         addBtn.onclick = () => {
-          const vi = getVi();
-          const qty = getQty();
-          this.addToCart(p.id, variants[vi].w, qty);
+          const mainAddBtn = document.getElementById('add-cart');
+          if (mainAddBtn) {
+            mainAddBtn.click();
+          } else {
+            const vi = getVi();
+            const qty = getQty();
+            const v = variants[vi] || variants[0];
+            this.addToCart(p.id, v.w, qty);
+          }
         };
       }
 
       if (buyBtn) {
         buyBtn.onclick = () => {
-          const vi = getVi();
-          const qty = getQty();
-          const v = variants[vi] || variants[0];
-          this.openQuickOrderModal(p.id, v.w, qty);
+          const mainBuyBtn = document.getElementById('buy-now');
+          if (mainBuyBtn) {
+            mainBuyBtn.click();
+          } else {
+            const vi = getVi();
+            const qty = getQty();
+            const v = variants[vi] || variants[0];
+            this.openQuickOrderModal(p.id, v.w, qty);
+          }
         };
       }
 
-      // Scroll listener: show sticky bar once past main buy buttons
+      // Scroll listener: show sticky bar immediately on mobile or past buy buttons on desktop
       const triggerEl = document.getElementById('buy-now') || document.getElementById('pd-price');
-      if (!triggerEl) return;
 
-      window.addEventListener('scroll', () => {
-        const rect = triggerEl.getBoundingClientRect();
-        if (rect.bottom < 0) {
+      const checkSticky = () => {
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile) {
           bar.classList.add('visible');
-        } else {
-          bar.classList.remove('visible');
+        } else if (triggerEl) {
+          const rect = triggerEl.getBoundingClientRect();
+          if (rect.bottom < 0) {
+            bar.classList.add('visible');
+          } else {
+            bar.classList.remove('visible');
+          }
         }
-      }, { passive: true });
+      };
+
+      window.addEventListener('scroll', checkSticky, { passive: true });
+      window.addEventListener('resize', checkSticky, { passive: true });
+      checkSticky();
     },
 
     /* ==========================================================================

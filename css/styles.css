@@ -368,10 +368,6 @@ textarea:focus-visible {
     max-height: 44px !important;
     object-fit: contain;
   }
-
-  .bb-sticky-buy-bar {
-    display: none !important;
-  }
 }
 
 .bb-header-inner {
@@ -3962,46 +3958,69 @@ details.faq .fa-body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-top: 1px solid var(--bb-border-medium);
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--bb-border-hairline);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
   padding: 10px 0;
-  z-index: 100;
+  z-index: 1000;
   transform: translateY(110%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.25s ease;
 }
 
 .bb-sticky-buy-bar.visible {
   transform: translateY(0);
 }
 
+/* On PDP on mobile, hide the generic bottom nav bar so sticky Add to Cart is clean and unobstructed */
+body.bb-pdp-page .bb-mobile-bar {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  body.bb-pdp-page {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .bb-sticky-buy-bar {
+    transform: translateY(0) !important;
+    padding-top: 8px;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 .bb-sticky-buy-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
 }
 
 .bb-sticky-product-meta {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   min-width: 0;
+  flex: 1;
 }
 
 .bb-sticky-thumb {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-sm);
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
   object-fit: cover;
   border: 1px solid var(--bb-border-hairline);
   flex-shrink: 0;
 }
 
+.bb-sticky-meta-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
 .bb-sticky-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--bb-text-main);
   line-height: 1.25;
@@ -4010,28 +4029,70 @@ details.faq .fa-body {
   text-overflow: ellipsis;
 }
 
+.bb-sticky-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
 .bb-sticky-weight {
-  font-size: 16px;
+  font-size: 13px;
   color: var(--bb-text-muted);
+  white-space: nowrap;
 }
 
 .bb-sticky-price {
   font-family: var(--font-english);
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--bb-primary);
   white-space: nowrap;
+  line-height: 1.2;
 }
 
 .bb-sticky-actions {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 8px;
   flex-shrink: 0;
 }
 
-@media (max-width: 576px) {
-  .bb-sticky-product-meta div {
+.bb-sticky-actions .bb-btn {
+  font-size: 15px;
+  padding: 10px 18px;
+  white-space: nowrap;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 600px) {
+  .bb-sticky-title {
     display: none;
+  }
+
+  .bb-sticky-thumb {
+    width: 40px;
+    height: 40px;
+  }
+
+  .bb-sticky-actions {
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .bb-sticky-actions #sticky-bar-add {
+    width: 100%;
+    max-width: 220px;
+    padding: 11px 16px;
+    font-size: 16px;
+    font-weight: 700;
+    justify-content: center;
+  }
+
+  .bb-sticky-actions #sticky-bar-buy {
+    display: none !important;
   }
 }
 
