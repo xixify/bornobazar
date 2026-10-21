@@ -1096,6 +1096,114 @@
       if (document.getElementById('checkout-form')) {
         this.initCheckoutPage();
       }
+
+      // Smooth auto-scrolling circular collection highlight on mobile
+      this.initCollectionCirclesAutoScroll();
+    },
+
+    initCollectionCirclesAutoScroll: function () {
+      const containers = document.querySelectorAll('.bb-collection-circles');
+      if (!containers || containers.length === 0) return;
+
+      containers.forEach(container => {
+        if (container.dataset.autoscrollInit === 'true') return;
+        container.dataset.autoscrollInit = 'true';
+
+        let isInteracting = false;
+        let isPaused = false;
+        let resumeTimer = null;
+        let halfWidth = 0;
+
+        // Clone children once for seamless infinite wrapping
+        const children = Array.from(container.children);
+        if (children.length > 0) {
+          children.forEach(child => {
+            const clone = child.cloneNode(true);
+            clone.classList.add('bb-circle-clone');
+            clone.setAttribute('aria-hidden', 'true');
+            container.appendChild(clone);
+          });
+        }
+
+        const updateHalfWidth = () => {
+          const firstClone = container.querySelector('.bb-circle-clone');
+          if (firstClone && container.children.length > 0) {
+            const diff = firstClone.offsetLeft - container.children[0].offsetLeft;
+            if (diff > 0) {
+              halfWidth = diff;
+              return;
+            }
+          }
+          if (container.scrollWidth > container.clientWidth) {
+            halfWidth = container.scrollWidth / 2;
+          }
+        };
+
+        // Calculate initially and on load/resize
+        updateHalfWidth();
+        window.addEventListener('load', updateHalfWidth);
+        window.addEventListener('resize', updateHalfWidth);
+
+        // Continuous smooth auto-scroll ticker
+        const speed = 0.75; // ~45px per second (comfortably legible)
+        const tick = () => {
+          if (window.innerWidth <= 820) {
+            if (halfWidth <= 0) {
+              updateHalfWidth();
+            }
+            if (!isInteracting && !isPaused && halfWidth > 0) {
+              container.scrollLeft += speed;
+              if (container.scrollLeft >= halfWidth) {
+                container.scrollLeft -= halfWidth;
+              }
+            }
+          }
+          requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+
+        const onInteractionStart = () => {
+          isInteracting = true;
+          if (resumeTimer) clearTimeout(resumeTimer);
+        };
+
+        const onInteractionEnd = () => {
+          if (resumeTimer) clearTimeout(resumeTimer);
+          resumeTimer = setTimeout(() => {
+            isInteracting = false;
+          }, 2000); // 2s pause after user release before auto-glide resumes
+        };
+
+        // Touch event listeners
+        container.addEventListener('touchstart', onInteractionStart, { passive: true });
+        container.addEventListener('touchend', onInteractionEnd, { passive: true });
+        container.addEventListener('touchcancel', onInteractionEnd, { passive: true });
+
+        // Pointer event listeners (supports hybrid/emulated devices)
+        container.addEventListener('pointerdown', onInteractionStart, { passive: true });
+        container.addEventListener('pointerup', onInteractionEnd, { passive: true });
+        container.addEventListener('pointercancel', onInteractionEnd, { passive: true });
+
+        // Pause on mouse hover
+        container.addEventListener('mouseenter', () => {
+          isPaused = true;
+        });
+
+        container.addEventListener('mouseleave', () => {
+          isPaused = false;
+        });
+
+        // Seamless infinite wrap during manual touch/drag scrolling
+        container.addEventListener('scroll', () => {
+          if (halfWidth > 0) {
+            if (container.scrollLeft >= halfWidth * 1.95) {
+              container.scrollLeft -= halfWidth;
+            } else if (container.scrollLeft <= 0 && isInteracting) {
+              container.scrollLeft += halfWidth;
+            }
+          }
+        }, { passive: true });
+      });
     },
 
     loadProductsSync: function () {
@@ -1598,26 +1706,25 @@
         });
       });
 
-      // Interactive Category Cards on shop.html
-      const catCards = document.querySelectorAll('.bb-cat-card[data-cat-filter]');
-      catCards.forEach(card => {
-        card.addEventListener('click', (e) => {
-          e.preventDefault();
-          const targetCat = normalizeCat(card.getAttribute('data-cat-filter') || 'all');
-          currentCategory = targetCat;
-          filterPills.forEach(p => {
-            const pillCat = normalizeCat(p.getAttribute('data-cat'));
-            if (pillCat === targetCat) {
-              p.classList.add('active');
-            } else {
-              p.classList.remove('active');
-            }
-          });
-          applyFilters();
-          if (container) {
-            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Interactive Category Cards on shop.html (handles original & auto-scroll clones)
+      document.addEventListener('click', (e) => {
+        const card = e.target.closest('.bb-cat-card[data-cat-filter]');
+        if (!card) return;
+        e.preventDefault();
+        const targetCat = normalizeCat(card.getAttribute('data-cat-filter') || 'all');
+        currentCategory = targetCat;
+        filterPills.forEach(p => {
+          const pillCat = normalizeCat(p.getAttribute('data-cat'));
+          if (pillCat === targetCat) {
+            p.classList.add('active');
+          } else {
+            p.classList.remove('active');
           }
         });
+        applyFilters();
+        if (container) {
+          container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       });
 
       if (sortSelect) {

@@ -866,20 +866,22 @@ textarea:focus-visible {
    GOOSEBUMPS-INSPIRED CIRCULAR COLLECTION STRIP
    ========================================================================== */
 .bb-collections-strip {
-  padding: 24px 0 20px;
+  padding: 20px 0 16px;
   background-color: var(--bb-bg-surface);
   border-bottom: 1px solid var(--bb-border-hairline);
+  overflow: hidden;
 }
 
 .bb-collection-circles {
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: center;
-  gap: 28px;
+  gap: 16px;
   overflow-x: auto;
-  padding: 4px 6px 8px;
+  padding: 4px 6px 12px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  scroll-behavior: auto;
 }
 
 .bb-collection-circles::-webkit-scrollbar {
@@ -887,9 +889,15 @@ textarea:focus-visible {
 }
 
 @media (max-width: 820px) {
+  .bb-collections-strip .bb-container {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 100%;
+  }
   .bb-collection-circles {
     justify-content: flex-start;
-    gap: 18px;
+    gap: 12px;
+    padding: 4px 16px 12px;
   }
 }
 
@@ -899,9 +907,33 @@ textarea:focus-visible {
   align-items: center;
   text-align: center;
   flex: 0 0 auto;
-  width: 92px;
+  min-width: 104px;
+  background-color: var(--bb-bg-surface);
+  border: 1px solid var(--bb-border-hairline);
+  border-radius: 8px;
+  padding: 12px 10px 10px;
   cursor: pointer;
   text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.bb-circle-item:hover {
+  border-color: var(--bb-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(197, 30, 37, 0.12);
+}
+
+@media (min-width: 821px) {
+  .bb-circle-clone {
+    display: none !important;
+  }
+}
+
+@media (max-width: 820px) {
+  .bb-circle-clone {
+    display: flex !important;
+  }
 }
 
 .bb-circle-img-wrap {
@@ -918,7 +950,7 @@ textarea:focus-visible {
 
 .bb-circle-item:hover .bb-circle-img-wrap {
   border-color: var(--bb-primary);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(197, 30, 37, 0.18);
 }
 
