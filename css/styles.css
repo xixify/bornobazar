@@ -1909,19 +1909,28 @@ textarea {
 
 .pd {
   display: grid;
-  grid-template-columns: minmax(0, 480px) 1fr;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
   gap: 40px;
   padding: 16px 0 40px;
+  align-items: start;
 }
 
 @media (max-width: 960px) {
   .pd {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 }
 
 .pd-gallery {
-  align-self: stretch;
+  width: 100%;
+  min-width: 0;
+  align-self: start;
+}
+
+.pd-info {
+  width: 100%;
+  min-width: 0;
 }
 
 .pd-gal-sticky {
@@ -1929,10 +1938,10 @@ textarea {
   flex-direction: column;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 961px) {
   .pd-gal-sticky {
     position: sticky;
-    top: 110px;
+    top: 100px;
   }
 }
 
@@ -4748,8 +4757,8 @@ details.faq .fa-body {
    ========================================================================== */
 .bb-goosebumps-trust-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 14px;
   margin: 24px 0;
   padding: 16px;
   background: #FFFFFF;
