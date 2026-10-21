@@ -2233,6 +2233,7 @@ textarea {
 }
 
 .pd-cta-grid .btn.gold {
+  grid-column: 1 / -1;
   background: var(--bb-gold);
   color: #fff;
 }
