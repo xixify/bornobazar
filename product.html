@@ -179,15 +179,24 @@
 
       <!-- Main Product Detail Grid (Zai-style) -->
       <div class="pd">
-        <!-- Left Column: Gallery -->
+        <!-- Left Column: Gallery with Carousel & Dots -->
         <div class="pd-gallery" id="pd-gallery">
           <div class="pd-gal-sticky">
-            <div class="main-img">
-              <img id="pd-main-img" src="All images/784003317_1053599810614671_8011314832392916094_n.jpg" alt="জলপাই আচার">
+            <div class="main-img pd-main-slider" id="pd-main-slider">
+              <div class="pd-slide" data-i="0">
+                <img id="pd-main-img" src="All images/784003317_1053599810614671_8011314832392916094_n.jpg" alt="জলপাই আচার">
+              </div>
+              <div class="pd-slide" data-i="1">
+                <img src="All images/825327284_1084767320831253_7499887150210209201_n.jpg" alt="জলপাই আচার ২" loading="lazy">
+              </div>
+            </div>
+            <div class="pd-gallery-dots" id="pd-gallery-dots" aria-label="ছবি বাছাই ডটস">
+              <button type="button" class="pd-gallery-dot active" data-i="0" aria-label="ছবি ১"></button>
+              <button type="button" class="pd-gallery-dot" data-i="1" aria-label="ছবি ২"></button>
             </div>
             <div class="pd-thumbs" id="pd-thumbs-box">
-              <button class="active" data-i="0"><img src="All images/784003317_1053599810614671_8011314832392916094_n.jpg" alt="জলপাই আচার ১"></button>
-              <button data-i="1"><img src="All images/825327284_1084767320831253_7499887150210209201_n.jpg" alt="জলপাই আচার ২"></button>
+              <button class="active" data-i="0" aria-label="ছবি ১"><img src="All images/784003317_1053599810614671_8011314832392916094_n.jpg" alt="জলপাই আচার ১"></button>
+              <button data-i="1" aria-label="ছবি ২"><img src="All images/825327284_1084767320831253_7499887150210209201_n.jpg" alt="জলপাই আচার ২"></button>
             </div>
           </div>
         </div>
@@ -445,8 +454,6 @@
             </div>
           </div>
           <div class="sku-line">প্রোডাক্ট কোড: <b>BB-ACH-002</b> &bull; প্রস্তুতকারক: <b>বর্ণবাজার</b>, দাড়িয়াপুর, মুজিবনগর, মেহেরপুর</div>
-          <div class="opt-label" style="margin-top:24px">বিস্তারিত</div>
-          <div id="pd-sections"></div>
         </div>
       </div>
 
@@ -461,6 +468,9 @@
 
       <!-- ALPINO-INSPIRED: 4-STEP HERITAGE PROCESS -->
       <section class="bb-artisan-section" id="pd-artisan-section"></section>
+
+      <!-- PRODUCT DETAILED SPECIFICATIONS ACCORDION (PLACED BEFORE FAQ) -->
+      <section class="bb-product-specs-section" id="pd-detailed-specs-section"></section>
 
       <!-- Below the Fold Details, FAQ & Customer Reviews -->
       <div class="pd-desc" id="pd-desc"></div>

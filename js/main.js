@@ -2236,19 +2236,28 @@
         `;
       }
 
-      // Gallery
+      // Gallery with Mobile Carousel & Bottom Dots
       const galEl = document.getElementById('pd-gallery');
       const images = (p.images && p.images.length > 0) ? p.images : [p.primary_image || 'Logo/bornobazar-logo.png'];
       if (galEl) {
         galEl.innerHTML = `
           <div class="pd-gal-sticky">
-            <div class="main-img">
-              <img id="pd-main-img" src="${images[0]}" alt="${escHtml(p.name_bn)}">
+            <div class="main-img pd-main-slider" id="pd-main-slider">
+              ${images.map((src, i) => `
+                <div class="pd-slide" data-i="${i}">
+                  <img src="${src}" alt="${escHtml(p.name_bn)} - ছবি ${i+1}" loading="${i === 0 ? 'eager' : 'lazy'}">
+                </div>
+              `).join('')}
             </div>
             ${images.length > 1 ? `
-              <div class="pd-thumbs">
+              <div class="pd-gallery-dots" id="pd-gallery-dots" aria-label="ছবি বাছাই ডটস">
+                ${images.map((_, i) => `
+                  <button type="button" class="pd-gallery-dot ${i === 0 ? 'active' : ''}" data-i="${i}" aria-label="ছবি ${i+1}"></button>
+                `).join('')}
+              </div>
+              <div class="pd-thumbs" id="pd-thumbs-box">
                 ${images.map((src, i) => `
-                  <button class="${i === 0 ? 'active' : ''}" data-i="${i}">
+                  <button type="button" class="${i === 0 ? 'active' : ''}" data-i="${i}" aria-label="ছবি থাম্বনেইল ${i+1}">
                     <img src="${src}" alt="${escHtml(p.name_bn)} ${i+1}" loading="lazy">
                   </button>
                 `).join('')}
@@ -2257,12 +2266,46 @@
           </div>
         `;
 
-        galEl.addEventListener('click', e => {
-          const b = e.target.closest('.pd-thumbs button');
-          if (!b) return;
-          const idx = parseInt(b.dataset.i, 10);
-          document.getElementById('pd-main-img').src = images[idx];
-          galEl.querySelectorAll('.pd-thumbs button').forEach(x => x.classList.toggle('active', x === b));
+        const slider = document.getElementById('pd-main-slider');
+        const dots = galEl.querySelectorAll('.pd-gallery-dot');
+        const thumbs = galEl.querySelectorAll('.pd-thumbs button');
+
+        const setActiveSlide = (idx) => {
+          if (!slider) return;
+          slider.scrollTo({
+            left: idx * slider.clientWidth,
+            behavior: 'smooth'
+          });
+          dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+          thumbs.forEach((t, i) => t.classList.toggle('active', i === idx));
+        };
+
+        // Scroll listener on slider to update active dot on swipe/scroll
+        if (slider && images.length > 1) {
+          let scrollTimeout;
+          slider.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+              const width = slider.clientWidth || 1;
+              const activeIdx = Math.round(slider.scrollLeft / width);
+              dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+              thumbs.forEach((t, i) => t.classList.toggle('active', i === activeIdx));
+            }, 50);
+          }, { passive: true });
+        }
+
+        dots.forEach(dot => {
+          dot.addEventListener('click', () => {
+            const idx = parseInt(dot.dataset.i, 10);
+            setActiveSlide(idx);
+          });
+        });
+
+        thumbs.forEach(thumb => {
+          thumb.addEventListener('click', () => {
+            const idx = parseInt(thumb.dataset.i, 10);
+            setActiveSlide(idx);
+          });
         });
       }
 
@@ -2504,8 +2547,6 @@
             </div>
           </div>
           <div class="sku-line">প্রোডাক্ট কোড: <b>${escHtml(p.sku || p.id)}</b> &bull; প্রস্তুতকারক: <b>বর্ণবাজার</b>, দাড়িয়াপুর, মুজিবনগর, মেহেরপুর</div>
-          <div class="opt-label" style="margin-top:24px">বিস্তারিত</div>
-          <div id="pd-sections"></div>
         `;
 
         // Paint Price & Variants with Bundle & Save calculations
@@ -2674,54 +2715,137 @@
 
         paintPrice();
 
-        // Collapsible Detail Sections
+        // Product Detailed Specifications & Accordions (Placed before FAQ)
         const specsRows = [
-          ['সাইজ অপশন', variants.map(v => v.w).join(', ')],
+          ['পণ্যের নাম', `${p.name_bn} ${p.name_en ? `(${p.name_en})` : ''}`],
           ['ক্যাটাগরি', p.category],
           ['প্রোডাক্ট কোড (SKU)', p.sku || p.id],
-          ['সংরক্ষণ', p.category === 'শুটকি ও ভর্তা' ? 'ফ্রিজের নরমাল চেম্বারে রাখুন' : 'তেল ও মশলায় রোদে সংরক্ষিত'],
-          ['প্রস্তুতকারক', 'বর্ণবাজার — দাড়িয়াপুর, মুজিবনগর, মেহেরপুর']
+          ['প্যাকেজিং ধরন', 'ফুড-গ্রেড প্রিমিয়াম এয়ারটাইট কাঁচের বয়াম'],
+          ['উপলব্ধ সাইজ / ওজন', variants.map(v => v.w).join(', ')],
+          ['সংরক্ষণ প্রণালী', p.category === 'শুটকি ও ভর্তা' ? 'খোলার পর ফ্রিজের নরমাল চেম্বারে রাখুন' : 'তেল ও মশলায় রোদে সংরক্ষিত'],
+          ['প্রস্তুতকারক ও মোড়কজাতকারী', 'বর্ণবাজার — দাড়িয়াপুর, মুজিবনগর, মেহেরপুর']
         ];
         if (p.bsti_certified) {
-          specsRows.splice(3, 0, ['সার্টিফিকেশন', 'BSTI অনুমোদিত (BDS:CAC-260)']);
+          specsRows.splice(4, 0, ['গুণগত মান সনদ', 'BSTI অনুমোদিত (BDS:CAC-260)']);
         }
 
-        const secItem = (title, body, open = false) => `
-          <details class="pd-sec"${open ? ' open' : ''}>
-            <summary>${title}</summary>
+        const secItem = (title, body, open = false, iconSvg = '') => `
+          <details class="pd-sec-item"${open ? ' open' : ''}>
+            <summary>
+              <span class="sec-title-wrap">
+                ${iconSvg}
+                <span>${title}</span>
+              </span>
+            </summary>
             <div class="sec-body">${body}</div>
           </details>
         `;
 
-        const sections = [
-          secItem('ডেলিভারি ও রিটার্ন পলিসি', `
-            <div class="rules-list">
-              <div class="rule"><span class="n">১</span><span>ডেলিভারির সময় পার্সেল খুলে জার ভাঙা বা ছিদ্র আছে কি না দেখে নিন।</span></div>
-              <div class="rule"><span class="n">২</span><span>খাবার পণ্য হওয়ায় জারের সিল খোলার পর ফেরতযোগ্য নয়।</span></div>
-              <div class="rule"><span class="n">৩</span><span>ভাঙা বা ভুল পণ্য পেলে ২৪ ঘণ্টার মধ্যে ছবি/ভিডিও সহ জানান — আমাদের খরচে নতুন পণ্য বদলে দেওয়া হবে।</span></div>
-            </div>
-          `),
-          secItem('উপকরণ ও গুণাগুণ', `<p>${escHtml(p.ingredients || p.facts || 'খাঁটি সরিষার তেল, দেশি ফল, ভাজা মশলা, বিট লবণ ও প্রাকৃতিক প্রিজারভেটিভ।')}</p>`),
-          secItem('পণ্য পরিচিতি', `<p>${escHtml(p.description || '')}</p>`, true),
-          secItem('স্পেসিফিকেশন ও তথ্য', `
-            <table class="specs">
-              ${specsRows.map(r => `<tr><td>${r[0]}</td><td>${escHtml(r[1])}</td></tr>`).join('')}
-            </table>
-          `),
-          secItem('সংরক্ষণ বিধি ও পরামর্শ', `
-            <ul>
-              <li>আচার হাত দিয়ে স্পর্শ করবেন না, সর্বদা পরিষ্কার শুকনো চামচ ব্যবহার করুন।</li>
-              <li>মাঝে মাঝে উজ্জ্বল রোদে দিন।</li>
-              <li>আচারের উপরিভাগে সরিষার তেলের একটি পাতলা স্তর বজায় রাখুন।</li>
-              <li>প্রয়োজনে ফ্রিজে সংরক্ষণ করুন।</li>
-            </ul>
-          `),
-          secItem('প্রস্তুতকারক ও বাজারজাতকারী তথ্য', `
-            <p>বর্ণবাজার (Bornobazar)<br>দাড়িয়াপুর, মুজিবনগর, মেহেরপুর।<br><br>কাস্টমার কেয়ার হেল্পলাইন: 09617-334422<br>বিএসটিআই লাইসেন্স নম্বর: BDS:CAC-260</p>
-          `)
-        ];
+        const specsEl = document.getElementById('pd-detailed-specs-section');
+        if (specsEl) {
+          const sections = [
+            secItem('বিস্তারিত', `
+              <p style="font-size: 17px; line-height: 1.7; color: var(--bb-text-main); margin-bottom: 16px;">
+                ${escHtml(p.description || 'মেহেরপুরের ঐতিহাসিক মুজিবনগরের ঘরোয়া রেসিপিতে তৈরি খাঁটি স্বাদের আচার।')}
+              </p>
+              <div class="bb-highlights-grid">
+                <div class="bb-hl-card">
+                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  <div><b>১০০% খাঁটি ও নির্ভেজাল:</b> কোনো ক্ষতিকর রাসায়নিক প্রিজারভেটিভ বা কৃত্রিম রঙ ব্যবহার করা হয় না।</div>
+                </div>
+                <div class="bb-hl-card">
+                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                  <div><b>প্রাকৃতিক রোদে শুকানো:</b> মিষ্টি কড়া রোদে দীর্ঘ সময় ধরে মশলা ও তেলের রসায়ন পরিপক্ব করা হয়।</div>
+                </div>
+                <div class="bb-hl-card">
+                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                  <div><b>বিএসটিআই সনদপ্রাপ্ত:</b> জাতীয় মান নিয়ন্ত্রণ সংস্থা বিএসটিআই কর্তৃক অনুমোদিত (BDS:CAC-260)।</div>
+                </div>
+              </div>
+            `, true, '<svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>'),
 
-        document.getElementById('pd-sections').innerHTML = sections.join('');
+            secItem('ডেলিভারি ও রিটার্ন পলিসি', `
+              <div class="bb-policy-grid">
+                <div class="bb-policy-card">
+                  <h4 style="margin-top:0; font-size:17px; color:var(--bb-text-main); font-weight:700;">ডেলিভারি সময় ও চার্জ</h4>
+                  <p style="margin:6px 0;">• <b>ঢাকা সিটির ভিতরে:</b> ডেলিভারি চার্জ ৳৭০। ১-২ কার্যদিবসের মধ্যে দ্রুততম সময়ে ডেলিভারি।</p>
+                  <p style="margin:6px 0;">• <b>ঢাকা সিটির বাইরে (সারা দেশ):</b> ডেলিভারি চার্জ ৳১৩০। ২-৩ কার্যদিবসের মধ্যে জেলা বা থানা পর্যায়ে হোম ডেলিভারি।</p>
+                  <p style="margin:6px 0;">• <b>ক্যাশ অন ডেলিভারি:</b> পণ্য হাতে পেয়ে পরীক্ষা করে সম্পূর্ণ মূল্য পরিশোধ করুন।</p>
+                </div>
+                <div class="bb-policy-card">
+                  <h4 style="margin-top:0; font-size:17px; color:var(--bb-text-main); font-weight:700;">রিটার্ন ও রিপ্লেসমেন্ট পলিসি</h4>
+                  <div class="rules-list">
+                    <div class="rule"><span class="n">১</span><span>ডেলিভারিম্যানের উপস্থিতিতে পার্সেল খুলে জারের অক্ষত অবস্থা দেখে গ্রহণ করুন।</span></div>
+                    <div class="rule"><span class="n">২</span><span>পরিবহনকালে জার ভাঙা বা ত্রুটিপূর্ণ পণ্য পৌঁছালে ছবি/ভিডিও সহ আমাদের জানান।</span></div>
+                    <div class="rule"><span class="n">৩</span><span>আমাদের খরচে ২৪ ঘণ্টার মধ্যে নতুন পণ্য বদলে দেওয়া হবে। খাদ্যপণ্য হওয়ায় সিল খোলার পর ফেরতযোগ্য নয়।</span></div>
+                  </div>
+                </div>
+              </div>
+            `, false, '<svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a2 2 0 104 0m-4 0a2 2 0 114 0m-8 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>'),
+
+            secItem('উপকরণ', `
+              <p style="font-size: 16px; line-height: 1.6; color: var(--bb-text-main);">
+                <b>মূল উপাদানসমূহ:</b> ${escHtml(p.ingredients || p.facts || 'খাঁটি ঘানিভাঙা সরিষার তেল, বাছাইকৃত তাজা উপাদান, ভাজা পাঁচফোড়ন, মেথি, মৌরি, বিট লবণ, জিরা, কালোজিরা, কাশ্মীরি মরিচ ও ভিনেগার।')}
+              </p>
+              <div class="bb-ingr-badges">
+                <span class="bb-ingr-tag"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="#059669" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>১০০% খাঁটি সরিষার তেল</span>
+                <span class="bb-ingr-tag"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="#059669" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>কোনো কেমিক্যাল প্রিজারভেটিভ নেই</span>
+                <span class="bb-ingr-tag"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="#059669" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>কোনো কৃত্রিম রঙ নেই</span>
+                <span class="bb-ingr-tag"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="#059669" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>সূর্যের তাপে প্রাকৃতিকভাবে তৈরি</span>
+              </div>
+            `, false, '<svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>'),
+
+            secItem('পরিচিতি', `
+              <p style="font-size: 16px; line-height: 1.7; color: var(--bb-text-main); margin-bottom: 12px;">
+                <b>বর্ণবাজার ও মেহেরপুরের আচার ঐতিহ্য:</b> ঐতিহাসিকভাবে বিখ্যাত মেহেরপুরের মুজিবনগর থেকে উঠে আসা এক নিখাদ স্বাদ। আমাদের প্রতিটি আচার তৈরি হয় গ্রামীণ গৃহিণীদের পরম মমতায় ও আদি ঘরোয়া রেসিপির নিখুঁত অনুকরণে।
+              </p>
+              <p style="font-size: 16px; line-height: 1.7; color: var(--bb-text-muted);">
+                বাণিজ্যিক কারখানার যান্ত্রিক বাষ্প প্রক্রিয়ার বদলে বর্ণবাজার আস্থা রেখেছে শত বছরের বাঙালি গৃহস্থালী রীতিতে — মাটির কলস ও কাঁচের বয়ামে রেখে মিষ্টি কড়া রোদে মশলার প্রতিটি দানা ফলের সাথে মিশে তৈরি করে এই রাজকীয় স্বাদ। আপনি যখন এই জারের ঢাকনা খুলবেন, পাবেন খাঁটি ঘানিভাঙা সরিষার তেল আর ভাজা পাঁচফোড়নের মনমাতানো সুবাস।
+              </p>
+            `, false, '<svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>'),
+
+            secItem('স্পেসিফিকেশন', `
+              <table class="specs">
+                ${specsRows.map(r => `<tr><td>${r[0]}</td><td>${escHtml(r[1])}</td></tr>`).join('')}
+              </table>
+            `, false, '<svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>'),
+
+            secItem('সংরক্ষণ বিধি', `
+              <ul class="bb-storage-list">
+                <li><strong>চামচের পরিচ্ছন্নতা:</strong> আচার বয়াম থেকে তোলার সময় সর্বদা সম্পূর্ণ শুকনো ও পরিষ্কার স্টিল বা কাঠের চামচ ব্যবহার করুন। কখনো হাত বা ভেজা চামচ ব্যবহার করবেন না।</li>
+                <li><strong>তেলের সুরক্ষা স্তর:</strong> আচারের ফল বা মশলার উপরিভাগে সর্বদা খাঁটি সরিষার তেলের একটি পাতলা স্তর রাখুন। তেল কমে গেলে সামান্য গরম করে ঠান্ডা করা সরিষার তেল ঢেলে দিন।</li>
+                <li><strong>রোদে শুকানো:</strong> স্বাদ ও সুবাস দীর্ঘস্থায়ী রাখতে মাসে অন্তত ১-২ বার উজ্জ্বল মিষ্টি রোদে কয়েক ঘণ্টার জন্য বয়ামটি রাখুন।</li>
+                <li><strong>স্টোরেজ টেম্পারেচার:</strong> সরাসরি স্যাঁতসেঁতে পরিবেশ বা চুলার তাপ থেকে দূরে ঠান্ডা ও ছায়াযুক্ত স্থানে রাখুন।</li>
+                <li><strong>সেলফ-লাইফ:</strong> সঠিক নিয়ম মেনে সংরক্ষণ করলে সাধারণ তাপমাত্রায় ১২ মাস পর্যন্ত আচারের আসল স্বাদ ও সৌরভ পুরোপুরি অক্ষত থাকে।</li>
+              </ul>
+            `, false, '<svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>'),
+
+            secItem('প্রস্তুতকারক, মোড়কজাত ও বাজারজাতকারী', `
+              <div class="bb-company-info-card">
+                <h4 style="margin-top:0; font-size:18px; color:var(--bb-primary); font-weight:700;">বর্ণবাজার খাদ্য পণ্যসম্ভার (Bornobazar Food Products)</h4>
+                <p style="margin:6px 0; font-size:16px; color:var(--bb-text-main);"><b>উৎপাদন ও মোড়কজাতকরণ কেন্দ্র:</b> দাড়িয়াপুর, ডাকঘর: মুজিবনগর, জেলা: মেহেরপুর — ৭১১০, খুলনা বিভাগ, বাংলাদেশ।</p>
+                <p style="margin:6px 0; font-size:16px; color:var(--bb-text-main);"><b>বিপণন ও অনলাইন ডেলিভারি সেল:</b> বর্ণবাজার ডিজিটাল ই-কমার্স ইউনিট, ঢাকা ও মেহেরপুর।</p>
+                <div class="bb-company-contact-row">
+                  <div><strong>হটলাইন নম্বর:</strong> <a href="tel:09617334422" style="color:var(--bb-primary); font-weight:700;">09617-334422</a></div>
+                  <div><strong>সরাসরি মোবাইল:</strong> <a href="tel:01922379382" style="color:var(--bb-primary); font-weight:700;">01922-379382</a></div>
+                  <div><strong>অফিসিয়াল হোয়াটসঅ্যাপ:</strong> <a href="https://wa.me/8801922379382" target="_blank" rel="noopener" style="color:#059669; font-weight:700;">01922-379382</a></div>
+                  <div><strong>বিএসটিআই সনদ:</strong> BDS:CAC-260 মানসম্মত লাইসেন্সিং</div>
+                </div>
+              </div>
+            `, false, '<svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>')
+          ];
+
+          specsEl.innerHTML = `
+            <div class="bb-specs-header">
+              <span class="bb-specs-badge">পূর্ণাঙ্গ বিবরণ ও তথ্যাবলী</span>
+              <h2 class="bb-specs-title">পণ্যের বিস্তারিত ও স্পেসিফিকেশন</h2>
+              <p class="bb-specs-subtitle">ঐতিহ্যবাহী মেহেরপুরের ঘরোয়া স্বাদ, শুদ্ধতা, সংরক্ষণ ও প্রস্তুত প্রণালীর তথ্যাবলী</p>
+            </div>
+            <div class="bb-specs-accordion">
+              ${sections.join('')}
+            </div>
+          `;
+        }
       }
 
       // Below the Fold: FAQs and Verified Reviews
