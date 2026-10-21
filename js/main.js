@@ -2293,6 +2293,71 @@
           </div>
           <div class="opt-label">ওজন / সাইজ বাছুন</div>
           <div class="weight-chips" id="wchips"></div>
+
+          <!-- Goosebumps-Style Bundle & Save Selector (Replacing Subscription) -->
+          <div class="bb-purchase-section">
+            <div class="bb-purchase-label">
+              <span>ক্রয় ও সেভার বান্ডেল অপশন</span>
+              <span style="font-size: 16px; color: #059669; font-weight: 700;">বান্ডেল অফারে ১৫% পর্যন্ত ছাড়!</span>
+            </div>
+            <div class="bb-purchase-options" id="bb-purchase-modes">
+              <!-- Option 1: Single Jar -->
+              <label class="bb-purchase-card active" data-bundle-mode="single">
+                <input type="radio" name="bb_bundle_select" value="single" checked style="display:none;">
+                <div class="bb-purchase-card-content">
+                  <div class="bb-purchase-card-left">
+                    <span class="bb-radio-circle"></span>
+                    <div>
+                      <div class="bb-purchase-title">একক বয়াম (Standard Single Jar)</div>
+                      <div class="bb-purchase-desc">১টি বয়াম &bull; স্ট্যান্ডার্ড মূল্য</div>
+                    </div>
+                  </div>
+                  <div class="bb-purchase-pricing">
+                    <span class="bb-purchase-price-now" id="bundle-single-price">৳০</span>
+                  </div>
+                </div>
+              </label>
+
+              <!-- Option 2: Duo Pack (Save 10%) -->
+              <label class="bb-purchase-card" data-bundle-mode="duo">
+                <span class="bb-purchase-badge">জনপ্রিয় &bull; ১০% ছাড়</span>
+                <input type="radio" name="bb_bundle_select" value="duo" style="display:none;">
+                <div class="bb-purchase-card-content">
+                  <div class="bb-purchase-card-left">
+                    <span class="bb-radio-circle"></span>
+                    <div>
+                      <div class="bb-purchase-title">বান্ডেল ও সেভ — ডাবল প্যাক (২টি বয়াম)</div>
+                      <div class="bb-purchase-desc">১০% সাশ্রয় &bull; একই বা কমপ্লিমেন্টারি ফ্লেভার</div>
+                    </div>
+                  </div>
+                  <div class="bb-purchase-pricing">
+                    <span class="bb-purchase-price-now" id="bundle-duo-price">৳০</span>
+                    <span class="bb-purchase-price-was" id="bundle-duo-was">৳০</span>
+                  </div>
+                </div>
+              </label>
+
+              <!-- Option 3: Trio Saver (Save 15%) -->
+              <label class="bb-purchase-card" data-bundle-mode="trio">
+                <span class="bb-purchase-badge best-value">সেরা ভ্যালু &bull; ১৫% ছাড়</span>
+                <input type="radio" name="bb_bundle_select" value="trio" style="display:none;">
+                <div class="bb-purchase-card-content">
+                  <div class="bb-purchase-card-left">
+                    <span class="bb-radio-circle"></span>
+                    <div>
+                      <div class="bb-purchase-title">মেগা সেভার বান্ডেল — ট্রায়ো প্যাক (৩টি বয়াম)</div>
+                      <div class="bb-purchase-desc">১৫% বিশেষ ছাড় &bull; পরিবার ও উপহারের সেরা পছন্দ</div>
+                    </div>
+                  </div>
+                  <div class="bb-purchase-pricing">
+                    <span class="bb-purchase-price-now" id="bundle-trio-price">৳০</span>
+                    <span class="bb-purchase-price-was" id="bundle-trio-was">৳০</span>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+
           <div class="qty-row">
             <div>
               <div class="opt-label" style="margin-top:0">পরিমাণ</div>
@@ -2307,6 +2372,7 @@
               </div>
             </div>
           </div>
+
           <div class="pd-cta-grid">
             <button class="btn" id="add-cart">
               <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -2318,7 +2384,7 @@
               <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
               </svg>
-              <span>এখনই অর্ডার করুন</span>
+              <span>১-ক্লিকে ক্যাশ অন ডেলিভারি অর্ডার</span>
             </button>
             <button class="btn wa" id="buy-wa">
               <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
@@ -2333,6 +2399,59 @@
               <span>09617-334422</span>
             </a>
           </div>
+
+          <!-- Goosebumps Taste & Texture Profile -->
+          <div class="bb-taste-profile">
+            <div class="bb-taste-profile-title">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+              </svg>
+              <span>স্বাদ ও টেক্সচার প্রোফাইল (Taste & Texture Profile)</span>
+            </div>
+            <div class="bb-taste-grid">
+              <div class="bb-taste-item">
+                <div class="bb-taste-label-row"><span>টক (Sourness)</span><span>৪/৫</span></div>
+                <div class="bb-taste-meter-bar">
+                  <span class="bb-taste-meter-pip active"></span>
+                  <span class="bb-taste-meter-pip active"></span>
+                  <span class="bb-taste-meter-pip active"></span>
+                  <span class="bb-taste-meter-pip active"></span>
+                  <span class="bb-taste-meter-pip"></span>
+                </div>
+              </div>
+              <div class="bb-taste-item">
+                <div class="bb-taste-label-row"><span>ঝাল (Spiciness)</span><span>৩/৫</span></div>
+                <div class="bb-taste-meter-bar">
+                  <span class="bb-taste-meter-pip active gold"></span>
+                  <span class="bb-taste-meter-pip active gold"></span>
+                  <span class="bb-taste-meter-pip active gold"></span>
+                  <span class="bb-taste-meter-pip"></span>
+                  <span class="bb-taste-meter-pip"></span>
+                </div>
+              </div>
+              <div class="bb-taste-item">
+                <div class="bb-taste-label-row"><span>মিষ্টি (Sweetness)</span><span>৩/৫</span></div>
+                <div class="bb-taste-meter-bar">
+                  <span class="bb-taste-meter-pip active"></span>
+                  <span class="bb-taste-meter-pip active"></span>
+                  <span class="bb-taste-meter-pip active"></span>
+                  <span class="bb-taste-meter-pip"></span>
+                  <span class="bb-taste-meter-pip"></span>
+                </div>
+              </div>
+              <div class="bb-taste-item">
+                <div class="bb-taste-label-row"><span>ঘনত্ব (Texture)</span><span>ঘরোয়া ঘন</span></div>
+                <div class="bb-taste-meter-bar">
+                  <span class="bb-taste-meter-pip active"></span>
+                  <span class="bb-taste-meter-pip active"></span>
+                  <span class="bb-taste-meter-pip active"></span>
+                  <span class="bb-taste-meter-pip active"></span>
+                  <span class="bb-taste-meter-pip active"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="estimator" id="estimator">
             <div class="e-label">
               <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a2 2 0 104 0m-4 0a2 2 0 114 0m-8 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
@@ -2344,22 +2463,44 @@
             </select>
             <div class="e-result" id="e-result"></div>
           </div>
-          <div class="trust-chips">
-            <div>
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-              <span>ক্যাশ অন ডেলিভারি</span>
+
+          <!-- Goosebumps 4-Item Trust Strip -->
+          <div class="bb-goosebumps-trust-grid">
+            <div class="bb-gb-trust-item">
+              <div class="bb-gb-trust-icon">
+                <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                </svg>
+              </div>
+              <div class="bb-gb-trust-title">খাঁটি সরিষার তেল</div>
+              <div class="bb-gb-trust-sub">১০০% ঘানিভাঙা তেল</div>
             </div>
-            <div>
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a2 2 0 104 0m-4 0a2 2 0 114 0m-8 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
-              <span>সারা দেশে ডেলিভারি</span>
+            <div class="bb-gb-trust-item">
+              <div class="bb-gb-trust-icon">
+                <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+              </div>
+              <div class="bb-gb-trust-title">রোদে শুকানো আচার</div>
+              <div class="bb-gb-trust-sub">প্রাকৃতিক সূর্যের তাপে</div>
             </div>
-            <div>
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-              <span>${p.bsti_certified ? 'BSTI অনুমোদিত' : 'সরিষার তেলে তৈরি'}</span>
+            <div class="bb-gb-trust-item">
+              <div class="bb-gb-trust-icon">
+                <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+              </div>
+              <div class="bb-gb-trust-title">বিএসটিআই অনুমোদিত</div>
+              <div class="bb-gb-trust-sub">BDS:CAC-260 মানসম্মত</div>
             </div>
-            <div>
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-              <span>হোয়াটসঅ্যাপ সাপোর্ট</span>
+            <div class="bb-gb-trust-item">
+              <div class="bb-gb-trust-icon">
+                <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+              </div>
+              <div class="bb-gb-trust-title">ক্যাশ অন ডেলিভারি</div>
+              <div class="bb-gb-trust-sub">৬৪ জেলায় দ্রুত ডেলিভারি</div>
             </div>
           </div>
           <div class="sku-line">প্রোডাক্ট কোড: <b>${escHtml(p.sku || p.id)}</b> &bull; প্রস্তুতকারক: <b>বর্ণবাজার</b>, দাড়িয়াপুর, মুজিবনগর, মেহেরপুর</div>
@@ -2367,33 +2508,88 @@
           <div id="pd-sections"></div>
         `;
 
-        // Paint Price & Variants
+        // Paint Price & Variants with Bundle & Save calculations
         const priceEl = document.getElementById('pd-price');
         const chipsEl = document.getElementById('wchips');
         const qtyEl = document.getElementById('qty');
+        let bundleMode = 'single'; // 'single' | 'duo' | 'trio'
+
+        const calcBundle = (v, q) => {
+          const unitPrice = v.price;
+          const unitReg = v.regular;
+          const singleTotal = unitPrice * q;
+          const singleReg = unitReg * q;
+
+          const duoQty = 2 * q;
+          const duoReg = unitPrice * duoQty;
+          const duoTotal = Math.round(duoReg * 0.90); // 10% off
+
+          const trioQty = 3 * q;
+          const trioReg = unitPrice * trioQty;
+          const trioTotal = Math.round(trioReg * 0.85); // 15% off
+
+          return {
+            single: { price: singleTotal, reg: singleReg, save: Math.max(0, singleReg - singleTotal), jars: 1 * q },
+            duo: { price: duoTotal, reg: duoReg, save: Math.max(0, duoReg - duoTotal), jars: duoQty },
+            trio: { price: trioTotal, reg: trioReg, save: Math.max(0, trioReg - trioTotal), jars: trioQty }
+          };
+        };
 
         const paintPrice = () => {
           const v = variants[vi];
-          const totalPr = v.price * qty;
-          const totalReg = v.regular * qty;
-          const save = totalReg > totalPr ? totalReg - totalPr : 0;
+          const bData = calcBundle(v, qty);
+          const current = bData[bundleMode];
 
+          // Paint Main Price
           priceEl.innerHTML = `
-            <span class="price">${fmtPrice(totalPr)}</span>
-            ${save > 0 ? `<s>${fmtPrice(totalReg)}</s><span class="save-chip">সাশ্রয় ${fmtPrice(save)}</span>` : ''}
+            <span class="price">${fmtPrice(current.price)}</span>
+            ${current.save > 0 ? `<s>${fmtPrice(current.reg)}</s><span class="save-chip">সাশ্রয় ${fmtPrice(current.save)}</span>` : (current.reg > current.price ? `<s>${fmtPrice(current.reg)}</s><span class="save-chip">সাশ্রয় ${fmtPrice(current.reg - current.price)}</span>` : '')}
           `;
 
-          chipsEl.innerHTML = variants.map((v, i) => `
+          // Paint Bundle Options
+          const sPriceEl = document.getElementById('bundle-single-price');
+          const dPriceEl = document.getElementById('bundle-duo-price');
+          const dWasEl = document.getElementById('bundle-duo-was');
+          const tPriceEl = document.getElementById('bundle-trio-price');
+          const tWasEl = document.getElementById('bundle-trio-was');
+
+          if (sPriceEl) sPriceEl.textContent = fmtPrice(bData.single.price);
+          if (dPriceEl) dPriceEl.textContent = fmtPrice(bData.duo.price);
+          if (dWasEl) dWasEl.textContent = fmtPrice(bData.duo.reg);
+          if (tPriceEl) tPriceEl.textContent = fmtPrice(bData.trio.price);
+          if (tWasEl) tWasEl.textContent = fmtPrice(bData.trio.reg);
+
+          // Paint Weight Chips
+          chipsEl.innerHTML = variants.map((x, i) => `
             <button class="wchip${i === vi ? ' active' : ''}" data-i="${i}">
-              <b>${escHtml(v.w)}</b>
-              <span>${fmtPrice(v.price)}</span>
+              <b>${escHtml(x.w)}</b>
+              <span>${fmtPrice(x.price)}</span>
             </button>
           `).join('');
 
           if (this._updateStickyBar) {
-            this._updateStickyBar();
+            this._updateStickyBar(current.price, bundleMode);
           }
         };
+
+        // Bundle selector click handler
+        const bundleOptionsEl = document.getElementById('bb-purchase-modes');
+        if (bundleOptionsEl) {
+          bundleOptionsEl.addEventListener('click', e => {
+            const card = e.target.closest('.bb-purchase-card');
+            if (!card) return;
+            const mode = card.dataset.bundleMode;
+            if (!mode) return;
+            bundleMode = mode;
+            bundleOptionsEl.querySelectorAll('.bb-purchase-card').forEach(c => {
+              const active = c.dataset.bundleMode === bundleMode;
+              c.classList.toggle('active', active);
+              const radio = c.querySelector('input[type="radio"]');
+              if (radio) radio.checked = active;
+            });
+            paintPrice();
+          });
+        }
 
         chipsEl.addEventListener('click', e => {
           const ch = e.target.closest('.wchip');
@@ -2420,18 +2616,44 @@
           paintPrice();
         };
 
-        // CTAs
+        // CTAs with Bundle & Save payload
         document.getElementById('add-cart').onclick = () => {
-          this.addToCart(p.id, variants[vi].w, qty);
-        };
-        document.getElementById('buy-now').onclick = () => {
-          this.addToCart(p.id, variants[vi].w, qty);
-          window.location.href = 'checkout.html';
-        };
-        document.getElementById('buy-wa').onclick = () => {
-          this.addToCart(p.id, variants[vi].w, qty);
           const v = variants[vi];
-          const txt = `আসসালামু আলাইকুম! বর্ণবাজার-এ অর্ডার করতে চাই:\n\n${p.name_bn} (${v.w}) × ${qty} = ${fmtPrice(v.price * qty)}\nপ্রোডাক্ট কোড: ${p.sku || p.id}\n\nপেমেন্ট: ক্যাশ অন ডেলিভারি`;
+          const bData = calcBundle(v, qty);
+          const current = bData[bundleMode];
+          if (bundleMode === 'single') {
+            this.addToCart(p.id, v.w, qty);
+          } else {
+            const label = bundleMode === 'duo' ? 'ডাবল প্যাক কম্বো (২টি বয়াম - ১০% ছাড়)' : 'মেগা সেভার ট্রায়ো (৩টি বয়াম - ১৫% ছাড়)';
+            this.cart.push({
+              id: `${p.id}-${bundleMode}`,
+              name_bn: `${p.name_bn} — ${label}`,
+              name_en: p.name_en,
+              image: p.primary_image,
+              weight: `${v.w} [${current.jars}টি বয়াম]`,
+              price: Math.round(current.price / qty),
+              qty: qty
+            });
+            this.saveCart();
+            this.showToast(`${label} কার্টে যোগ করা হয়েছে (${fmtPrice(current.save)} সাশ্রয়)!`);
+            this.openCartDrawer();
+          }
+        };
+
+        document.getElementById('buy-now').onclick = () => {
+          const v = variants[vi];
+          const bData = calcBundle(v, qty);
+          const current = bData[bundleMode];
+          const label = bundleMode === 'single' ? v.w : `${v.w} (${current.jars}টি বয়ামের ${bundleMode === 'duo' ? 'ডাবল প্যাক' : 'ট্রায়ো সেভার'} সেট)`;
+          this.openQuickOrderModal(p.id, label, qty);
+        };
+
+        document.getElementById('buy-wa').onclick = () => {
+          const v = variants[vi];
+          const bData = calcBundle(v, qty);
+          const current = bData[bundleMode];
+          const modeLabel = bundleMode === 'single' ? 'একক বয়াম' : (bundleMode === 'duo' ? 'ডাবল প্যাক কম্বো (১০% ছাড়)' : 'ট্রায়ো সেভার বান্ডেল (১৫% ছাড়)');
+          const txt = `আসসালামু আলাইকুম! বর্ণবাজার-এ অর্ডার করতে চাই:\n\nপণ্য: ${p.name_bn}\nঅপশন: ${modeLabel} (${v.w} × ${current.jars}টি বয়াম)\nপরিমাণ: ${qty}\nসর্বমোট মূল্য: ${fmtPrice(current.price)}\nপেমেন্ট: ক্যাশ অন ডেলিভারি\n\nঅনুগ্রহ করে কনফার্ম করবেন।`;
           window.open('https://wa.me/8801922379382?text=' + encodeURIComponent(txt), '_blank');
         };
 
@@ -2972,12 +3194,14 @@
       if (imgEl) imgEl.src = p.primary_image || 'Logo/bornobazar-logo.png';
       if (titleEl) titleEl.textContent = p.name_bn;
 
-      const updateStickyMeta = () => {
+      const updateStickyMeta = (dynamicPrice, activeBundleMode) => {
         const vi = getVi();
         const qty = getQty();
         const v = variants[vi] || variants[0];
-        if (weightEl) weightEl.textContent = v.w;
-        if (priceEl) priceEl.textContent = fmtPrice(v.price * qty);
+        const mode = activeBundleMode || 'single';
+        const label = mode === 'single' ? v.w : `${v.w} (${mode === 'duo' ? '২-প্যাক কম্বো' : '৩-প্যাক বান্ডেল'})`;
+        if (weightEl) weightEl.textContent = label;
+        if (priceEl) priceEl.textContent = fmtPrice(dynamicPrice || (v.price * qty));
       };
 
       updateStickyMeta();
@@ -2995,8 +3219,8 @@
         buyBtn.onclick = () => {
           const vi = getVi();
           const qty = getQty();
-          this.addToCart(p.id, variants[vi].w, qty);
-          window.location.href = 'checkout.html';
+          const v = variants[vi] || variants[0];
+          this.openQuickOrderModal(p.id, v.w, qty);
         };
       }
 
