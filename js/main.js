@@ -1099,6 +1099,18 @@
 
       // Smooth auto-scrolling circular collection highlight on mobile
       this.initCollectionCirclesAutoScroll();
+
+      // Sticky header elevation on scroll
+      const header = document.querySelector('.bb-header');
+      if (header) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 20) {
+            header.classList.add('is-scrolled');
+          } else {
+            header.classList.remove('is-scrolled');
+          }
+        }, { passive: true });
+      }
     },
 
     initCollectionCirclesAutoScroll: function () {

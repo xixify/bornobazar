@@ -81,7 +81,7 @@
   --radius-lg: 8px;
   --radius-xl: 8px;
   --radius-btn: 8px;
-  --header-height: 140px;
+  --header-height: 84px;
   --topbar-height: 38px;
 }
 
@@ -306,6 +306,11 @@ textarea:focus-visible {
   height: auto;
   min-height: var(--header-height);
   padding: 6px 0;
+  transition: box-shadow 0.2s ease;
+}
+
+.bb-header.is-scrolled {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 @media (max-width: 991px) {
@@ -351,12 +356,13 @@ textarea:focus-visible {
 }
 
 .bb-brand-logo img {
-  width: 150px;
+  width: 80px;
   height: auto;
-  max-width: 150px;
-  max-height: 130px;
+  max-width: 80px;
+  max-height: 75px;
   object-fit: contain;
   display: block;
+  transition: all 0.2s ease;
 }
 
 .bb-brand-title {
