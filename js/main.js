@@ -1111,6 +1111,19 @@
           }
         }, { passive: true });
       }
+
+      // Make full product card clickable anywhere to navigate directly to PDP
+      document.addEventListener('click', (e) => {
+        const card = e.target.closest('.bb-product-card');
+        if (!card) return;
+        const id = card.getAttribute('data-id');
+        if (!id) return;
+        const link = e.target.closest('a');
+        if (!link || link === card) {
+          e.preventDefault();
+          window.location.href = `product.html?id=${encodeURIComponent(id)}`;
+        }
+      });
     },
 
     initCollectionCirclesAutoScroll: function () {
@@ -1704,7 +1717,7 @@
 
         this.renderProductGrid(container, list);
         if (resultCount) {
-          resultCount.textContent = 'মোট ' + list.length.toLocaleString('bn-BD') + ' টি পণ্য প্রদর্শিত হচ্ছে';
+          resultCount.innerHTML = 'মোট <b>' + list.length.toLocaleString('bn-BD') + '</b>টি পণ্য';
         }
       };
 
@@ -1779,62 +1792,29 @@
         const firstWeight = (p.weights && p.weights.length > 0) ? p.weights[0] : '';
         const initialPrice = (p.weight_pricing && p.weight_pricing[firstWeight]) || p.sale_price;
 
-        const variantPillsHtml = (p.weights && p.weights.length > 1)
-          ? `<div class="bb-card-variant-pills">
-              ${p.weights.map((w, wIdx) => {
-                const wPrice = (p.weight_pricing && p.weight_pricing[w]) || p.sale_price;
-                return `<button type="button" class="bb-card-pill ${wIdx === 0 ? 'active' : ''}" data-weight="${escHtml(w)}" data-price="${wPrice}" onclick="Bornobazar.selectCardVariant(this, '${p.id}', '${escHtml(w)}', ${wPrice})">${escHtml(w)}</button>`;
-              }).join('')}
-            </div>`
-          : `<div class="bb-card-weights">
-              <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 6a2 2 0 012-2h8a2 2 0 012 2v2H4V6zm-2 4a2 2 0 012-2h12a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2v-6z" clip-rule="evenodd"/>
-              </svg>
-              <span>${firstWeight || 'স্ট্যান্ডার্ড জার'}</span>
-            </div>`;
-
         html += `
-          <div class="bb-product-card" data-id="${p.id}" data-selected-weight="${escHtml(firstWeight)}" data-selected-price="${initialPrice}">
+          <a href="product.html?id=${p.id}" class="bb-product-card" data-id="${p.id}" aria-label="${escHtml(p.name_bn)}">
             <div class="bb-card-image-wrap">
               <div class="bb-badge-stack">
                 ${saleBadge}
                 ${bstiBadge}
                 ${comboBadge}
               </div>
-              <a href="product.html?id=${p.id}">
-                <img src="${primaryImg}" alt="${escHtml(p.name_bn)}" loading="lazy">
-              </a>
+              <img src="${primaryImg}" alt="${escHtml(p.name_bn)}" loading="lazy">
             </div>
             <div class="bb-card-cat">${escHtml(p.category)}</div>
-            <h3 class="bb-card-title">
-              <a href="product.html?id=${p.id}">${escHtml(p.name_bn)}</a>
-            </h3>
+            <h3 class="bb-card-title">${escHtml(p.name_bn)}</h3>
             <div class="bb-card-rating" style="display: flex; align-items: center; gap: 4px; margin-bottom: 6px;">
               <span class="bb-card-stars" style="color: #D97706; display: inline-flex; gap: 2px;">
                 ${SVG_STAR_SM}${SVG_STAR_SM}${SVG_STAR_SM}${SVG_STAR_SM}${SVG_STAR_SM}
               </span>
               <span class="bb-card-score" style="font-size: 16px; color: var(--bb-text-muted); font-weight: 600; margin-left: 4px;">৪.৯ (৩৬)</span>
             </div>
-            ${variantPillsHtml}
             <div class="bb-card-price-row">
               <span class="bb-price-current">${fmtPrice(initialPrice)}</span>
               ${regPrice}
             </div>
-            <div class="bb-card-actions-dual">
-              <button type="button" class="bb-btn-cart-outline" onclick="Bornobazar.addCardSelectedToCart('${p.id}', this)" title="কার্টে যোগ করুন">
-                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-                </svg>
-                <span>কার্ট</span>
-              </button>
-              <button type="button" class="bb-btn-quick-buy" onclick="Bornobazar.openCardQuickOrder('${p.id}', this)" title="১ ক্লিকে সরাসরি ক্যাশ অন ডেলিভারি অর্ডার">
-                <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                </svg>
-                <span>১-ক্লিকে অর্ডার</span>
-              </button>
-            </div>
-          </div>
+          </a>
         `;
       });
       container.innerHTML = html;
@@ -2455,6 +2435,9 @@
           </div>
           <div class="opt-label">ওজন / সাইজ বাছুন</div>
           <div class="weight-chips" id="wchips"></div>
+          <div class="weight-select-wrap" id="wselect-wrap">
+            <select class="bb-weight-select" id="wselect" aria-label="ওজন বা সাইজ নির্বাচন করুন"></select>
+          </div>
 
           <!-- Goosebumps-Style Bundle & Save Selector (Replacing Subscription) -->
           <div class="bb-purchase-section">
@@ -2657,6 +2640,15 @@
             </button>
           `).join('');
 
+          // Paint Mobile Weight Select Dropdown
+          const selectEl = document.getElementById('wselect');
+          if (selectEl) {
+            selectEl.innerHTML = variants.map((x, i) => `
+              <option value="${i}" ${i === vi ? 'selected' : ''}>${escHtml(x.w)} — ${fmtPrice(x.price)}</option>
+            `).join('');
+            selectEl.value = String(vi);
+          }
+
           if (this._updateStickyBar) {
             this._updateStickyBar(current.price, bundleMode);
           }
@@ -2687,6 +2679,14 @@
           vi = parseInt(ch.dataset.i, 10);
           paintPrice();
         });
+
+        const mobileSelectEl = document.getElementById('wselect');
+        if (mobileSelectEl) {
+          mobileSelectEl.addEventListener('change', () => {
+            vi = parseInt(mobileSelectEl.value, 10);
+            paintPrice();
+          });
+        }
 
         const clampQty = (n) => Math.max(1, Math.min(99, parseInt(n, 10) || 1));
 
@@ -2950,26 +2950,17 @@
             </div>
             <div class="bb-grid bb-grid-4">
               ${related.map(item => `
-                <div class="bb-product-card" data-id="${item.id}">
+                <a href="product.html?id=${item.wc_id || item.id}" class="bb-product-card" data-id="${item.id}" aria-label="${escHtml(item.name_bn)}">
                   <div class="bb-card-image-wrap">
-                    <a href="product.html?id=${item.wc_id || item.id}">
-                      <img src="${item.primary_image}" alt="${escHtml(item.name_bn)}" loading="lazy">
-                    </a>
+                    <img src="${item.primary_image}" alt="${escHtml(item.name_bn)}" loading="lazy">
                   </div>
                   <div class="bb-card-cat">${item.category}</div>
-                  <h3 class="bb-card-title">
-                    <a href="product.html?id=${item.wc_id || item.id}">${escHtml(item.name_bn)}</a>
-                  </h3>
+                  <h3 class="bb-card-title">${escHtml(item.name_bn)}</h3>
                   <div class="bb-card-price-row">
                     <span class="bb-price-current">${fmtPrice(item.sale_price)}</span>
                     ${item.on_sale ? '<span class="bb-price-regular">' + fmtPrice(item.regular_price) + '</span>' : ''}
                   </div>
-                  <div class="bb-card-actions">
-                    <button class="bb-btn bb-btn-primary bb-btn-sm bb-btn-full" onclick="Bornobazar.addToCart('${item.id}', '${item.weights ? item.weights[0] : ''}')">
-                      অর্ডার করুন
-                    </button>
-                  </div>
-                </div>
+                </a>
               `).join('')}
             </div>
           `;

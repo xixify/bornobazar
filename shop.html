@@ -20,7 +20,7 @@
   <meta property="og:locale" content="bn_BD">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/styles.css?v=4.1">
+  <link rel="stylesheet" href="css/styles.css?v=4.2">
 
   <!-- Schema.org JSON-LD Breadcrumbs -->
   <script type="application/ld+json">
@@ -191,36 +191,33 @@
       <div class="bb-container">
 
         <!-- Controls Toolbar (Search, Filter Pills, Sort) -->
-        <div style="background: #fff; border: 1px solid var(--bb-border-hairline); border-radius: 8px; padding: 18px 20px; margin-bottom: 28px;">
-          <!-- Top Row: Search and Sort -->
-          <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <!-- Live Search -->
-            <div style="position: relative; flex: 1; min-width: 260px; max-width: 440px;">
-              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--bb-text-subtle);">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-              </svg>
-              <input type="text" id="shop-search-input" placeholder="আচার, শুটকি বা কম্বোর নাম লিখুন..." style="width: 100%; padding: 10px 14px 10px 40px; border: 1px solid var(--bb-border-medium); border-radius: 8px; font-size: 16px; background: var(--bb-bg-canvas);">
-            </div>
+        <div class="bb-shop-toolbar">
+          <!-- Row 1: Live Search -->
+          <div class="bb-toolbar-search-wrap">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="bb-toolbar-search-icon">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <input type="text" id="shop-search-input" placeholder="আচার, শুটকি বা কম্বোর নাম লিখুন..." class="bb-toolbar-search-input" aria-label="পণ্য খুঁজুন">
+          </div>
 
-            <!-- Sort and Results Count -->
-            <div style="display: flex; align-items: center; gap: 16px;">
-              <div id="shop-result-count" style="font-size: 16px; color: var(--bb-text-muted); font-weight: 600;">
-                মোট ২৮ টি পণ্য প্রদর্শিত হচ্ছে
-              </div>
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <label for="shop-sort-select" style="font-size: 16px; color: var(--bb-text-muted); white-space: nowrap;">সাজান:</label>
-                <select id="shop-sort-select" style="padding: 9px 12px; border: 1px solid var(--bb-border-medium); border-radius: 8px; font-size: 16px; background: #fff; color: var(--bb-text-main); font-weight: 500;">
-                  <option value="default">ডিফল্ট সাজানো</option>
-                  <option value="price_asc">মূল্য: কম থেকে বেশি</option>
-                  <option value="price_desc">মূল্য: বেশি থেকে কম</option>
-                  <option value="name_asc">নাম অনুযায়ী (বর্ণানুক্রমিক)</option>
-                </select>
-              </div>
+          <!-- Row 2: Sort and Results Count Meta Row -->
+          <div class="bb-toolbar-meta-row">
+            <div id="shop-result-count" class="bb-toolbar-count">
+              মোট <b>২৮</b>টি পণ্য
+            </div>
+            <div class="bb-toolbar-sort-wrap">
+              <label for="shop-sort-select" class="bb-toolbar-sort-label">সাজান:</label>
+              <select id="shop-sort-select" class="bb-toolbar-sort-select" aria-label="পণ্য সাজান">
+                <option value="default">ডিফল্ট সাজানো</option>
+                <option value="price_asc">মূল্য: কম থেকে বেশি</option>
+                <option value="price_desc">মূল্য: বেশি থেকে কম</option>
+                <option value="name_asc">নাম অনুযায়ী (বর্ণানুক্রমিক)</option>
+              </select>
             </div>
           </div>
 
-          <!-- Bottom Row: Category Filter Tabs -->
-          <div class="bb-filters" style="margin-bottom: 0;">
+          <!-- Row 3: Touch-Friendly Scrollable Category Filter Pills -->
+          <div class="bb-filters" id="shop-filters">
             <button class="bb-filter-pill active" data-cat="all">সকল পণ্য (২৮)</button>
             <button class="bb-filter-pill" data-cat="আচার">ঐতিহ্যবাহী আচার (২০)</button>
             <button class="bb-filter-pill" data-cat="স্পেশাল কম্বো">স্পেশাল কম্বো প্যাক (৮)</button>
@@ -1410,7 +1407,7 @@
       </button>
     </div>
     <div class="bb-drawer-body" id="cart-drawer-body">
-      <!-- Injected by js/main.js?v=4.1 -->
+      <!-- Injected by js/main.js?v=4.2 -->
     </div>
     <div class="bb-drawer-footer">
       <div class="bb-drawer-subtotal">
@@ -1455,6 +1452,6 @@
 
   <!-- Script -->
   <script src="data/products-data.js"></script>
-  <script src="js/main.js?v=4.1"></script>
+  <script src="js/main.js?v=4.2"></script>
 </body>
 </html>
