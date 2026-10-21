@@ -3112,8 +3112,88 @@
       const container = document.getElementById(containerId);
       if (!container) return;
 
-      const checkIcon = `<span style="display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background: #059669; color:#fff; margin-right:8px; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>`;
-      const crossIcon = `<span style="display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background: #E5E7EB; color:#6B7280; margin-right:8px; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span>`;
+      const checkIcon = `<span class="bb-comp-icon check"><svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>`;
+      const crossIcon = `<span class="bb-comp-icon cross"><svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span>`;
+
+      const rows = [
+        {
+          num: "১",
+          feature: "তেলের বিশুদ্ধতা",
+          bornobazar: "১০০% কাঠের ঘানিভাঙা খাঁটি সরিষার তেল",
+          others: "সস্তা পাম তেল অথবা ক্ষতিকর মিশ্র তেল"
+        },
+        {
+          num: "২",
+          feature: "রোদে শুকানোর পদ্ধতি",
+          bornobazar: "স্বাভাবিক উজ্জ্বল রোদে ধীরে শুকানো ও জারণ",
+          others: "কৃত্রিম বয়লার বা গ্যাস ওভেনে দ্রুত সেদ্ধ"
+        },
+        {
+          num: "৩",
+          feature: "সংরক্ষণ ও প্রিজারভেটিভ",
+          bornobazar: "সম্পূর্ণ কেমিক্যাল ও ক্ষতিকর ভিনেগার মুক্ত",
+          others: "বাণিজ্যিক সিন্থেটিক কেমিক্যাল ও কৃত্রিম রং"
+        },
+        {
+          num: "৪",
+          feature: "বিএসটিআই লাইসেন্স",
+          bornobazar: "বিএসটিআই অনুমোদিত মান (BDS:CAC-260)",
+          others: "অনুমোদনহীন বা অস্বাস্থ্যকর উৎপাদন উৎস"
+        },
+        {
+          num: "৫",
+          feature: "প্যাকেজিং ও জার",
+          bornobazar: "প্রিমিয়াম ফুড-গ্রেড কাঁচের জার ও সুরক্ষিত সিল",
+          others: "পাতলা ক্ষতিকর প্লাস্টিক কৌটা"
+        },
+        {
+          num: "৬",
+          feature: "স্বাদের নিশ্চয়তা",
+          bornobazar: "মেহেরপুরের গ্রামীণ মা-খালাদের ঐতিহ্যবাহী রেসিপি",
+          others: "বাণিজ্যিক কৃত্রিম এসেন্স ও কেমিক্যাল ফ্লেভার"
+        }
+      ];
+
+      const desktopRowsHtml = rows.map(r => `
+        <tr>
+          <td><strong>${r.feature}</strong></td>
+          <td class="bb-highlight-col">
+            <div style="display:flex; align-items:center;">
+              ${checkIcon}<span>${r.bornobazar}</span>
+            </div>
+          </td>
+          <td>
+            <div style="display:flex; align-items:center;">
+              ${crossIcon}<span>${r.others}</span>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+
+      const mobileCardsHtml = rows.map(r => `
+        <div class="bb-comp-mob-card">
+          <div class="bb-comp-mob-criterion">
+            <span class="bb-comp-num-pill">${r.num}</span>
+            <span>${r.feature}</span>
+          </div>
+          <div class="bb-comp-mob-grid">
+            <div class="bb-comp-mob-cell winner">
+              <div class="bb-comp-mob-cell-header">
+                ${checkIcon}
+                <span class="cell-tag">বর্ণবাজার</span>
+              </div>
+              <div class="bb-comp-mob-text">${r.bornobazar}</div>
+            </div>
+            <div class="bb-comp-mob-cell others">
+              <div class="bb-comp-mob-cell-header">
+                ${crossIcon}
+                <span class="cell-tag">অন্যান্য ব্র্যান্ড</span>
+              </div>
+              <div class="bb-comp-mob-text">${r.others}</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
 
       container.innerHTML = `
         <div class="bb-container">
@@ -3127,6 +3207,7 @@
             </p>
           </div>
 
+          <!-- DESKTOP TABLE VIEW (>= 768px) -->
           <div class="bb-comparison-table-wrap">
             <table class="bb-comp-table">
               <thead>
@@ -3140,38 +3221,30 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><strong>তেলের বিশুদ্ধতা</strong></td>
-                  <td class="bb-highlight-col"><div style="display:flex; align-items:center;">${checkIcon}<span>১০০% কাঠের ঘানিভাঙা খাঁটি সরিষার তেল</span></div></td>
-                  <td><div style="display:flex; align-items:center;">${crossIcon}<span>সস্তা পাম তেল অথবা ক্ষতিকর মিশ্র তেল</span></div></td>
-                </tr>
-                <tr>
-                  <td><strong>রোদে শুকানোর পদ্ধতি</strong></td>
-                  <td class="bb-highlight-col"><div style="display:flex; align-items:center;">${checkIcon}<span>স্বাভাবিক উজ্জ্বল রোদে ধীরে শুকানো ও জারণ</span></div></td>
-                  <td><div style="display:flex; align-items:center;">${crossIcon}<span>কৃত্রিম বয়লার বা গ্যাস ওভেনে দ্রুত সেদ্ধ</span></div></td>
-                </tr>
-                <tr>
-                  <td><strong>সংরক্ষণ ও প্রিজারভেটিভ</strong></td>
-                  <td class="bb-highlight-col"><div style="display:flex; align-items:center;">${checkIcon}<span>সম্পূর্ণ কেমিক্যাল ও ক্ষতিকর ভিনেগার মুক্ত</span></div></td>
-                  <td><div style="display:flex; align-items:center;">${crossIcon}<span>বাণিজ্যিক সিন্থেটিক কেমিক্যাল ও কৃত্রিম রং</span></div></td>
-                </tr>
-                <tr>
-                  <td><strong>বিএসটিআই লাইসেন্স</strong></td>
-                  <td class="bb-highlight-col"><div style="display:flex; align-items:center;">${checkIcon}<span>বিএসটিআই অনুমোদিত মান (BDS:CAC-260)</span></div></td>
-                  <td><div style="display:flex; align-items:center;">${crossIcon}<span>অনুমোদনহীন বা অস্বাস্থ্যকর উৎপাদন উৎস</span></div></td>
-                </tr>
-                <tr>
-                  <td><strong>প্যাকেজিং ও জার</strong></td>
-                  <td class="bb-highlight-col"><div style="display:flex; align-items:center;">${checkIcon}<span>প্রিমিয়াম ফুড-গ্রেড কাঁচের জার ও সুরক্ষিত সিল</span></div></td>
-                  <td><div style="display:flex; align-items:center;">${crossIcon}<span>পাতলা ক্ষতিকর প্লাস্টিক কৌটা</span></div></td>
-                </tr>
-                <tr>
-                  <td><strong>স্বাদের নিশ্চয়তা</strong></td>
-                  <td class="bb-highlight-col"><div style="display:flex; align-items:center;">${checkIcon}<span>মেহেরপুরের গ্রামীণ মা-খালাদের ঐতিহ্যবাহী রেসিপি</span></div></td>
-                  <td><div style="display:flex; align-items:center;">${crossIcon}<span>বাণিজ্যিক কৃত্রিম এসেন্স ও কেমিক্যাল ফ্লেভার</span></div></td>
-                </tr>
+                ${desktopRowsHtml}
               </tbody>
             </table>
+          </div>
+
+          <!-- MOBILE RESPONSIVE CARD VIEW (< 768px, ZERO HORIZONTAL SCROLL) -->
+          <div class="bb-comparison-mobile-wrap">
+            <div class="bb-comp-mob-banner">
+              <div class="bb-comp-mob-brand winner">
+                <div class="bb-brand-badge-pill gold">সেরা মান</div>
+                <div class="bb-brand-name">বর্ণবাজার</div>
+                <div class="bb-brand-tagline">ঐতিহ্যবাহী খাঁটি আচার</div>
+              </div>
+              <div class="bb-comp-mob-vs">VS</div>
+              <div class="bb-comp-mob-brand others">
+                <div class="bb-brand-badge-pill muted">বাজারের সাধারণ</div>
+                <div class="bb-brand-name">অন্যান্য ব্র্যান্ড</div>
+                <div class="bb-brand-tagline">বাণিজ্যিক মিশ্র আচার</div>
+              </div>
+            </div>
+
+            <div class="bb-comp-mob-list">
+              ${mobileCardsHtml}
+            </div>
           </div>
         </div>
       `;

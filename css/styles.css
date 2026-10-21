@@ -3229,7 +3229,10 @@ details.faq .fa-body {
 }
 
 /* ==========================================================================
-   ALPINO-INSPIRED COMPARISON TABLE (BORNOBAZAR VS OTHERS)
+   ALPINO-INSPIRED COMPARISON SECTION (BORNOBAZAR VS OTHERS)
+   Responsive Architecture:
+   - Desktop (>= 768px): Authoritative 3-column table
+   - Mobile (< 768px): High-Conversion Head-to-Head Cards (Zero Horizontal Scroll)
    ========================================================================== */
 .bb-comparison-section {
   padding: 60px 0;
@@ -3238,21 +3241,43 @@ details.faq .fa-body {
   border-bottom: 1px solid var(--bb-border-hairline);
 }
 
+.bb-comp-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.bb-comp-icon.check {
+  background-color: #059669;
+  color: #FFFFFF;
+}
+
+.bb-comp-icon.cross {
+  background-color: #E5E7EB;
+  color: #6B7280;
+}
+
+/* Desktop View (>= 768px) */
 .bb-comparison-table-wrap {
+  display: block;
   background-color: var(--bb-bg-surface);
   border-radius: var(--radius-md);
   border: 1px solid var(--bb-border-hairline);
-  overflow-x: auto;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   max-width: 920px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .bb-comp-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 16px;
-  min-width: 620px;
 }
 
 .bb-comp-table th,
@@ -3285,6 +3310,222 @@ details.faq .fa-body {
 
 .bb-comp-table tr:last-child td {
   border-bottom: none;
+}
+
+/* Mobile Responsive Cards (< 768px, ZERO HORIZONTAL SCROLL) */
+.bb-comparison-mobile-wrap {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .bb-comparison-section {
+    padding: 36px 0 44px;
+  }
+
+  .bb-comparison-table-wrap {
+    display: none !important;
+  }
+
+  .bb-comparison-mobile-wrap {
+    display: block !important;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* Head-to-Head Banner */
+  .bb-comp-mob-banner {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .bb-comp-mob-brand {
+    flex: 1;
+    padding: 14px 10px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bb-comp-mob-brand.winner {
+    background-color: var(--bb-primary);
+    color: #FFFFFF;
+    border: 1.5px solid var(--bb-primary);
+  }
+
+  .bb-comp-mob-brand.others {
+    background-color: #FFFFFF;
+    color: var(--bb-text-main);
+    border: 1px solid var(--bb-border-medium);
+  }
+
+  .bb-brand-badge-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .bb-brand-badge-pill.gold {
+    background-color: var(--bb-gold);
+    color: #FFFFFF;
+  }
+
+  .bb-brand-badge-pill.muted {
+    background-color: #E5E7EB;
+    color: #4B5563;
+  }
+
+  .bb-brand-name {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .bb-brand-tagline {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-top: 2px;
+  }
+
+  .bb-comp-mob-vs {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    border: 2px solid var(--bb-border-hairline);
+    color: var(--bb-primary);
+    font-size: 16px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  /* List of Comparison Cards */
+  .bb-comp-mob-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .bb-comp-mob-card {
+    background-color: #FFFFFF;
+    border: 1px solid var(--bb-border-hairline);
+    border-radius: 8px;
+    padding: 14px 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+
+  .bb-comp-mob-criterion {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--bb-text-main);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--bb-border-hairline);
+  }
+
+  .bb-comp-num-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 8px;
+    background-color: var(--bb-primary-subtle);
+    color: var(--bb-primary);
+    font-size: 16px;
+    font-weight: 700;
+    font-family: var(--font-english);
+    flex-shrink: 0;
+  }
+
+  .bb-comp-mob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  @media (max-width: 400px) {
+    .bb-comp-mob-grid {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+  }
+
+  .bb-comp-mob-cell {
+    border-radius: 8px;
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .bb-comp-mob-cell.winner {
+    background-color: #FFF8F8;
+    border: 1.5px solid #F3C7CB;
+    color: var(--bb-text-main);
+  }
+
+  .bb-comp-mob-cell.others {
+    background-color: #F9FAFB;
+    border: 1px solid var(--bb-border-hairline);
+    color: var(--bb-text-muted);
+  }
+
+  .bb-comp-mob-cell-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .bb-comp-mob-cell.winner .bb-comp-mob-cell-header {
+    color: var(--bb-primary);
+  }
+
+  .bb-comp-mob-cell.others .bb-comp-mob-cell-header {
+    color: #4B5563;
+  }
+
+  .bb-comp-mob-text {
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .bb-comp-mob-cell.winner .bb-comp-mob-text {
+    font-weight: 600;
+    color: #1C1917;
+  }
+
+  .bb-comp-mob-cell.others .bb-comp-mob-text {
+    font-weight: 400;
+    color: #665E57;
+  }
 }
 
 /* ==========================================================================
