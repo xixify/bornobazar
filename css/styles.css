@@ -81,7 +81,7 @@
   --radius-lg: 8px;
   --radius-xl: 8px;
   --radius-btn: 8px;
-  --header-height: 110px;
+  --header-height: 140px;
   --topbar-height: 38px;
 }
 
@@ -312,22 +312,22 @@ textarea:focus-visible {
   .bb-header {
     position: relative !important;
     top: auto !important;
-    min-height: 110px;
+    min-height: 96px;
   }
 
   .bb-brand-logo img {
     width: 100px !important;
     height: auto !important;
     max-width: 100px !important;
-    max-height: 80px !important;
+    max-height: 90px !important;
     object-fit: contain;
   }
 
   .bb-mobile-drawer .bb-brand-logo img {
-    width: 60px !important;
+    width: 50px !important;
     height: auto !important;
-    max-width: 60px !important;
-    max-height: 48px !important;
+    max-width: 50px !important;
+    max-height: 44px !important;
     object-fit: contain;
   }
 
@@ -354,7 +354,7 @@ textarea:focus-visible {
   width: 150px;
   height: auto;
   max-width: 150px;
-  max-height: 100px;
+  max-height: 130px;
   object-fit: contain;
   display: block;
 }
@@ -2667,7 +2667,7 @@ details.faq .fa-body {
     width: 100px !important;
     height: auto !important;
     max-width: 100px !important;
-    max-height: 80px !important;
+    max-height: 90px !important;
     object-fit: contain;
   }
 
