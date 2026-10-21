@@ -2630,6 +2630,9 @@
 
         paintPrice();
 
+        // Ensure call-mini is completely removed
+        document.querySelectorAll('.call-mini').forEach(el => el.remove());
+
         // Product Detailed Specifications & Accordions (Placed before FAQ)
         const specsRows = [
           ['পণ্যের নাম', `${p.name_bn} ${p.name_en ? `(${p.name_en})` : ''}`],

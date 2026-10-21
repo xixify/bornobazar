@@ -2252,23 +2252,7 @@ textarea {
 }
 
 .call-mini {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border: 1.5px solid var(--bb-border-medium);
-  border-radius: 8px;
-  background: #fff;
-  font-weight: 700;
-  font-size: 16px;
-  color: var(--bb-text-main);
-  padding: 12px 18px;
-  text-align: center;
-}
-
-.call-mini:hover {
-  border-color: var(--bb-primary);
-  color: var(--bb-primary);
+  display: none !important;
 }
 
 .estimator {
