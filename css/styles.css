@@ -3976,36 +3976,24 @@ body.bb-pdp-page .bb-mobile-bar {
   display: none !important;
 }
 
-@media (max-width: 768px) {
-  body.bb-pdp-page {
-    padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)) !important;
-  }
-
-  .bb-sticky-buy-bar {
-    transform: translateY(0) !important;
-    padding-top: 8px;
-    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
-  }
-}
-
 .bb-sticky-buy-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 16px;
 }
 
 .bb-sticky-product-meta {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   min-width: 0;
   flex: 1;
 }
 
 .bb-sticky-thumb {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 8px;
   object-fit: cover;
   border: 1px solid var(--bb-border-hairline);
@@ -4053,7 +4041,7 @@ body.bb-pdp-page .bb-mobile-bar {
 .bb-sticky-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   flex-shrink: 0;
 }
 
@@ -4067,32 +4055,120 @@ body.bb-pdp-page .bb-mobile-bar {
   gap: 6px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  body.bb-pdp-page {
+    padding-bottom: calc(82px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .bb-sticky-buy-bar {
+    transform: translateY(0) !important;
+    padding-top: 8px;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .bb-sticky-buy-inner {
+    gap: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
   .bb-sticky-title {
-    display: none;
+    display: none !important;
   }
 
   .bb-sticky-thumb {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+  }
+
+  .bb-sticky-product-meta {
+    gap: 8px;
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+
+  .bb-sticky-price-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+  }
+
+  .bb-sticky-price {
+    font-size: 16px;
+    line-height: 1.1;
+  }
+
+  .bb-sticky-weight {
+    font-size: 11px;
+    line-height: 1.1;
+    max-width: 65px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .bb-sticky-actions {
     flex: 1;
-    justify-content: flex-end;
+    min-width: 0;
+    gap: 6px;
+  }
+
+  .bb-sticky-actions .bb-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 10px 6px;
+    font-size: 13px;
+    font-weight: 700;
+    height: 42px;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    white-space: nowrap;
+    border-radius: 8px;
+  }
+
+  .bb-sticky-actions .bb-btn svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
   }
 
   .bb-sticky-actions #sticky-bar-add {
-    width: 100%;
-    max-width: 220px;
-    padding: 11px 16px;
-    font-size: 16px;
-    font-weight: 700;
-    justify-content: center;
+    max-width: none;
+    background-color: var(--bb-primary);
+    color: #FFFFFF;
   }
 
   .bb-sticky-actions #sticky-bar-buy {
-    display: none !important;
+    display: inline-flex !important;
+    background-color: var(--bb-gold);
+    color: #FFFFFF;
+  }
+}
+
+@media (max-width: 360px) {
+  .bb-sticky-buy-inner {
+    padding-left: 8px;
+    padding-right: 8px;
+    gap: 5px;
+  }
+
+  .bb-sticky-thumb {
+    width: 36px;
+    height: 36px;
+  }
+
+  .bb-sticky-actions .bb-btn {
+    font-size: 11.5px;
+    padding: 9px 3px;
+    gap: 2px;
+  }
+
+  .bb-sticky-actions .bb-btn svg {
+    display: none;
   }
 }
 
