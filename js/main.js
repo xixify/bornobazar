@@ -2443,70 +2443,6 @@
             </a>
           </div>
 
-          <!-- Goosebumps Taste & Texture Profile -->
-          <div class="bb-taste-profile">
-            <div class="bb-taste-profile-title">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-              </svg>
-              <span>স্বাদ ও টেক্সচার প্রোফাইল (Taste & Texture Profile)</span>
-            </div>
-            <div class="bb-taste-grid">
-              <div class="bb-taste-item">
-                <div class="bb-taste-label-row"><span>টক (Sourness)</span><span>৪/৫</span></div>
-                <div class="bb-taste-meter-bar">
-                  <span class="bb-taste-meter-pip active"></span>
-                  <span class="bb-taste-meter-pip active"></span>
-                  <span class="bb-taste-meter-pip active"></span>
-                  <span class="bb-taste-meter-pip active"></span>
-                  <span class="bb-taste-meter-pip"></span>
-                </div>
-              </div>
-              <div class="bb-taste-item">
-                <div class="bb-taste-label-row"><span>ঝাল (Spiciness)</span><span>৩/৫</span></div>
-                <div class="bb-taste-meter-bar">
-                  <span class="bb-taste-meter-pip active gold"></span>
-                  <span class="bb-taste-meter-pip active gold"></span>
-                  <span class="bb-taste-meter-pip active gold"></span>
-                  <span class="bb-taste-meter-pip"></span>
-                  <span class="bb-taste-meter-pip"></span>
-                </div>
-              </div>
-              <div class="bb-taste-item">
-                <div class="bb-taste-label-row"><span>মিষ্টি (Sweetness)</span><span>৩/৫</span></div>
-                <div class="bb-taste-meter-bar">
-                  <span class="bb-taste-meter-pip active"></span>
-                  <span class="bb-taste-meter-pip active"></span>
-                  <span class="bb-taste-meter-pip active"></span>
-                  <span class="bb-taste-meter-pip"></span>
-                  <span class="bb-taste-meter-pip"></span>
-                </div>
-              </div>
-              <div class="bb-taste-item">
-                <div class="bb-taste-label-row"><span>ঘনত্ব (Texture)</span><span>ঘরোয়া ঘন</span></div>
-                <div class="bb-taste-meter-bar">
-                  <span class="bb-taste-meter-pip active"></span>
-                  <span class="bb-taste-meter-pip active"></span>
-                  <span class="bb-taste-meter-pip active"></span>
-                  <span class="bb-taste-meter-pip active"></span>
-                  <span class="bb-taste-meter-pip active"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="estimator" id="estimator">
-            <div class="e-label">
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a2 2 0 104 0m-4 0a2 2 0 114 0m-8 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
-              <span>ডেলিভারি চার্জ যাচাই করুন</span>
-            </div>
-            <select id="district" aria-label="জেলা বাছাই করুন">
-              <option value="">জেলা বাছাই করুন…</option>
-              ${BB_DISTRICTS.map(d => `<option value="${d}">${d}</option>`).join('')}
-            </select>
-            <div class="e-result" id="e-result"></div>
-          </div>
-
           <!-- Goosebumps 4-Item Trust Strip -->
           <div class="bb-goosebumps-trust-grid">
             <div class="bb-gb-trust-item">
@@ -2698,21 +2634,6 @@
           window.open('https://wa.me/8801922379382?text=' + encodeURIComponent(txt), '_blank');
         };
 
-        // Estimator
-        document.getElementById('district').addEventListener('change', e => {
-          const d = e.target.value;
-          const res = document.getElementById('e-result');
-          if (!d) {
-            res.classList.remove('show');
-            return;
-          }
-          const inside = (d === 'ঢাকা');
-          res.innerHTML = inside
-            ? `<svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="#059669" style="vertical-align:middle; margin-right:4px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><b>${d}</b> — ঢাকার ভিতরে &bull; ডেলিভারি চার্জ <span class="in">৳৭০</span>`
-            : `<svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="#D97706" style="vertical-align:middle; margin-right:4px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><b>${d}</b> — ঢাকার বাইরে &bull; ডেলিভারি চার্জ <span class="out">৳১৩০</span>`;
-          res.classList.add('show');
-        });
-
         paintPrice();
 
         // Product Detailed Specifications & Accordions (Placed before FAQ)
@@ -2857,7 +2778,7 @@
 
         const FAQS = [
           ['অর্ডার কীভাবে করবো?', 'ওয়েবসাইটে পছন্দের পণ্য কার্টে যোগ করে চেকআউট করুন — ক্যাশ অন ডেলিভারিতে পণ্য হাতে পেয়ে টাকা দিবেন। চাইলে সরাসরি কল করুন 09617-334422 নম্বরে অথবা হোয়াটসঅ্যাপে মেসেজ দিন।'],
-          ['ডেলিভারি চার্জ কত?', 'ঢাকার ভিতরে ৳৭০, ঢাকার বাইরে ৳১৩০। পণ্যের পাশের "ডেলিভারি চার্জ যাচাই করুন" অপশনে জেলা বাছলে সাথে সাথে চার্জ দেখাবে।'],
+          ['ডেলিভারি চার্জ কত?', 'ঢাকার ভিতরে ৳৭০, ঢাকার বাইরে ৳১৩০। চেকআউটের সময় আপনার জেলা বাছাই করলেই সঠিক ডেলিভারি চার্জ স্বয়ংক্রিয়ভাবে হিসাব হবে।'],
           ['কতদিনে ডেলিভারি পাবো?', 'সাধারণত ঢাকার ভিতরে ১-২ কর্মদিবস এবং ঢাকার বাইরে ২-৩ কর্মদিবস সময় লাগে।'],
           ['পণ্য কি সম্পূর্ণ নির্ভেজাল?', 'সব পণ্য খাঁটি সরিষার তেল, চিনি, লবণ ও ঘরোয়া মশলায় প্রাকৃতিকভাবে সংরক্ষিত — কোনো কৃত্রিম কেমিক্যাল বা ক্ষতিকর প্রিজারভেটিভ নেই। বর্ণবাজার বিএসটিআই অনুমোদিত (BDS:CAC-260)।'],
           ['জার খোলার পর কতদিন ভালো থাকে?', storageFaq],
