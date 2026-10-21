@@ -3268,7 +3268,6 @@ details.faq .fa-body {
    ========================================================================== */
 .bb-comparison-section {
   padding: 60px 0;
-  background-color: var(--bb-bg-warm);
   border-top: 1px solid var(--bb-border-hairline);
   border-bottom: 1px solid var(--bb-border-hairline);
 }
