@@ -600,6 +600,7 @@ textarea:focus-visible {
   padding: var(--sp-8) 0;
   position: relative;
   overflow: hidden;
+  max-height: 700px;
 }
 
 .bb-hero-slides {
@@ -638,6 +639,7 @@ textarea:focus-visible {
     background-size: cover;
     padding: 70px 0 80px;
     min-height: 520px;
+    max-height: 700px;
     display: flex;
     align-items: center;
     position: relative;
