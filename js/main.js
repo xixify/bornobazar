@@ -1528,6 +1528,44 @@
       if (byId) return byId;
       const bySku = this.products.find(p => (p.sku && p.sku.toLowerCase() === q.toLowerCase()) || (p.slug && p.slug === q));
       if (bySku) return bySku;
+
+      // Seamless bridge with window.BB catalog (26 catalog items)
+      if (window.BB && Array.isArray(window.BB.products)) {
+        const bbP = window.BB.products.find(p => p.id === num || String(p.id) === q || p.slug === q || (p.sku && p.sku.toLowerCase() === q.toLowerCase()));
+        if (bbP) {
+          const categoryObj = (window.BB.categories || []).find(c => c.id === bbP.cat);
+          const categoryName = categoryObj ? categoryObj.name : 'ঐতিহ্যবাহী আচার';
+          const weights = (bbP.variants && bbP.variants.length > 0) ? bbP.variants.map(v => v.w) : ['স্ট্যান্ডার্ড'];
+          const weight_pricing = {};
+          if (bbP.variants) {
+            bbP.variants.forEach(v => { weight_pricing[v.w] = v.price; });
+          }
+          return {
+            id: String(bbP.id),
+            wc_id: bbP.id,
+            sku: bbP.sku || ('BB-' + bbP.id),
+            slug: bbP.slug,
+            name_bn: bbP.name,
+            name_en: bbP.nameEn || bbP.name,
+            category: categoryName,
+            type: 'variable',
+            base_price: bbP.minPrice,
+            sale_price: bbP.minPrice,
+            regular_price: bbP.maxReg || bbP.maxPrice,
+            on_sale: !!bbP.onSale,
+            weights: weights,
+            weight_pricing: weight_pricing,
+            primary_image: (bbP.images && bbP.images[0]) || 'Logo/bornobazar-logo.png',
+            images: bbP.images || [],
+            description: bbP.desc || '',
+            storage_instructions: Array.isArray(bbP.storage) ? bbP.storage.join('\n') : '',
+            ingredients: bbP.ingredients || '',
+            in_stock: true,
+            bsti_certified: !!bbP.bsti
+          };
+        }
+      }
+
       return this.products[0];
     },
 
