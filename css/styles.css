@@ -3389,9 +3389,10 @@ details.faq .fa-body {
   gap: 8px;
 }
 
+.bb-reel-buy-btn,
 .bb-reel-add-cart-btn {
   flex: 1;
-  background-color: var(--bb-green);
+  background-color: var(--bb-primary);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -3403,17 +3404,28 @@ details.faq .fa-body {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(175, 30, 36, 0.2);
 }
 
+.bb-reel-buy-btn:hover,
 .bb-reel-add-cart-btn:hover {
-  background-color: #16532B;
+  background-color: #8c141a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(175, 30, 36, 0.35);
+}
+
+.bb-reel-buy-btn svg,
+.bb-reel-add-cart-btn svg {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
 }
 
 .bb-reel-cart-icon-btn {
-  background-color: var(--bb-green);
-  color: #fff;
-  border: none;
+  background-color: #ffffff;
+  color: var(--bb-primary);
+  border: 1.5px solid var(--bb-border-medium);
   border-radius: 8px;
   width: 36px;
   height: 36px;
@@ -3421,12 +3433,21 @@ details.faq .fa-body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
   flex-shrink: 0;
 }
 
 .bb-reel-cart-icon-btn:hover {
-  background-color: #16532B;
+  background-color: var(--bb-primary-subtle);
+  border-color: var(--bb-primary);
+  color: var(--bb-primary);
+  transform: translateY(-1px);
+}
+
+.bb-reel-cart-icon-btn svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
 }
 
 /* Lightbox Reel Video Modal */

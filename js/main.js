@@ -3070,15 +3070,15 @@
                 </a>
               </div>
               <div class="bb-reel-btn-row">
-                <button type="button" class="bb-reel-add-cart-btn" onclick="Bornobazar.addToCart('${r.productId}', '${r.weight}')">
+                <button type="button" class="bb-reel-buy-btn bb-reel-add-cart-btn" onclick="Bornobazar.openQuickOrderModal('${r.productId}', '${r.weight}', 1); event.stopPropagation();" title="এখনই কিনুন">
                   <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                   </svg>
-                  <span>কার্টে যোগ করুন</span>
+                  <span>এখনই কিনুন</span>
                 </button>
-                <button type="button" class="bb-reel-cart-icon-btn" onclick="Bornobazar.addToCart('${r.productId}', '${r.weight}')" aria-label="কার্টে যোগ করুন">
+                <button type="button" class="bb-reel-cart-icon-btn" onclick="Bornobazar.addToCart('${r.productId}', '${r.weight}'); event.stopPropagation();" aria-label="কার্টে যোগ করুন" title="কার্টে যোগ করুন">
                   <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
                   </svg>
                 </button>
               </div>
@@ -3180,8 +3180,16 @@
             </div>
           </div>
           <div class="bb-reel-modal-actions">
-            <button type="button" class="bb-btn bb-btn-primary bb-btn-sm" style="font-size: 16px; padding: 8px 14px; border-radius: 8px;" onclick="Bornobazar.addToCart('${r.productId}', '${r.weight}')">
-              কার্টে যোগ করুন
+            <button type="button" class="bb-btn bb-btn-primary bb-btn-sm" style="font-size: 16px; padding: 8px 14px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px;" onclick="Bornobazar.closeReelModal(); Bornobazar.openQuickOrderModal('${r.productId}', '${r.weight}', 1)">
+              <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+              <span>এখনই কিনুন</span>
+            </button>
+            <button type="button" class="bb-btn bb-btn-secondary bb-btn-sm" style="font-size: 16px; padding: 8px 10px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center;" onclick="Bornobazar.addToCart('${r.productId}', '${r.weight}')" title="কার্টে যোগ করুন" aria-label="কার্টে যোগ করুন">
+              <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+              </svg>
             </button>
             <a href="product.html?id=${r.productId}" class="bb-btn bb-btn-secondary bb-btn-sm" style="font-size: 16px; padding: 8px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 4px;" title="বিস্তারিত দেখুন">
               বিস্তারিত
